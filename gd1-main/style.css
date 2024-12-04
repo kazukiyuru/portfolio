@@ -1,0 +1,268 @@
+
+
+#container {
+   display: flex;
+    height: 100px;
+    width: 100%;
+    font-family: serif;
+}
+
+#container img {
+width: 100px;
+height: 100px;
+}
+
+nav {
+    width: 100%;
+}
+
+.title01 {
+    font-size:5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom:2rem;
+    padding-top:30px;
+}
+
+h1 {
+    font-family: serif;
+}
+
+.box-item {
+   
+    
+    text-align: center;
+
+height: auto;
+
+
+}
+
+
+.main-nav {
+    overflow: hidden;
+     display: flex;
+   justify-content: center;
+}
+
+.main-nav li{
+ margin: 30px;
+ padding: 15px;
+color: #fff;
+background-color: #A1A3A6;
+}
+
+.main-nav a:hover {
+background-color: #C0C0C0;
+}
+
+html {
+    /* スムーズスクロール */
+    scroll-behavior: smooth;
+}
+
+section {
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+#hero{
+background-color: #C5C5C5;
+background-image: url(images/hero.jpg);
+}
+
+.nagasode {
+    background-color: #575457;
+    margin:  0 auto;
+    color: #fff;
+}
+
+.nagasode p {
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+#menu {
+    background-color: #C5C5C5;
+    text-align: center;
+    display: block;
+    align-items: center;
+}
+   
+
+.ponpon {
+   margin-top: 200px;
+    margin:0 auto;
+    background-blend-mode: #fff;
+background-color: gray;
+ color: #fff;
+ border-radius: 10px;
+}
+
+.list {
+    text-align: center;
+    justify-content: center;
+        font-size: 1.45rem;
+        margin-bottom: .1rem;
+        line-height: 1.7;
+       margin: 0 auto;
+}
+
+.grid-item {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(50%);
+}
+
+
+#contact {
+    background-color: #A1A3A6;
+   display: block;
+   text-align: center;
+}
+
+.btn {
+   background: #F26649;
+    font-size: 1.5rem;
+    color: #fff;
+    padding: 1rem 3.5rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin: 2rem 0 2.25rem;
+}
+
+.sns {
+    display: flex;
+    justify-content: center;
+}
+.sns a {
+    background: #fff;
+    width: 3.75rem;
+    height: 3.75rem;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 2rem;
+    padding: .75rem 0 0 .200rem;
+    color: #555;
+}
+
+.contact p {
+    padding-bottom: 50px;
+    color: #555;
+}
+
+.boxa {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.title {
+    font-size:7rem;
+    color: #575457;
+    text-align: center;
+    margin-bottom:2rem;
+}
+
+a:hover {
+    background-color:#F26649;
+}
+
+/*
+スマホで見た場合に適用されるCSS: メディアクエリー
+*/
+
+@media (min-width:600px){
+
+    .ponpon {
+        width: 52vh;
+        margin-top: 40px;
+    }
+    
+    .main-nav {
+        margin-left: 200px;
+    }
+
+    .main-nav li{
+        margin: 30px;
+        padding: 15px;
+    }
+
+    .box-item {
+        width: 500px;
+        padding: 20px;
+        font-size: 3.5rem;
+        justify-content: center;
+      }
+    
+      .sns a {
+        margin: 3rem;
+      }
+}
+
+@media (max-width: 700px){
+
+    #container {
+        display: flex;
+        flex-wrap: wrap ;
+        height: 200px;
+    }
+
+    .ponpon {
+        width: auto;
+        margin-top: 150px;
+    }
+
+  .box-item {
+    width: 120px;
+    padding: 20px;
+    font-size: 1.125rem;
+    justify-content: center;
+  }
+
+  .main-nav {
+    justify-content: center;
+    display: flex;
+  }
+
+.main-nav li {
+    margin: 5px;
+    padding: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+    .title{
+        font-size:4rem;
+    }
+
+    .grid-item:hover{
+        filter: grayscale(0);
+        transform: scale(1,1);
+        z-index: 3;
+    }
+
+    .grid-item{
+        transition: .3s;
+    }
+
+    .sns a {
+        margin: 1.2rem;
+    }
+}
+
+/*
+PCで見た場合に適用されるCSS: メディアクエリー
+@media (min-width:700px){
+    .title {
+        font-size:7rem;
+    }
+} 
+*/
+
