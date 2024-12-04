@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    justify-content: center;
+    margin: 0 auto ;
+}
+
+.top {
+    background-image: url(door.jpg);
+    filter: grayscale(40%);
+width: 100vw;    
+height: 800px;
+}
+
+.plus {
+   font-size: 20px;
+    margin: auto 0;
+    color: #fff;
+}
+.logo {
+    display: flex;
+}
+
+
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin: auto 0;
+}
+
+
+
+.header-nav {
+    display: flex;
+    list-style: none;
+   
+ 
+}
+
+
+
+ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+
+
+h1 {
+    justify-content: center;
+    font-size: 70px;
+}
+
+.sns {
+
+justify-content: center;
+}
+
+.child {
+    display: block;
+    margin: 30px;
+}
+
+.child iframe {
+    width: 300px;
+    height: 300px;
+}
+
+.back .sns .child p {
+    border-bottom: 3px solid #000;
+    
+}
+
+footer p {
+    color: #fff;
+    text-align: center;
+    margin: auto 0;
+}
+
+.map {
+    display: flex;
+    justify-content: center;
+margin: 50px 0;
+}
+
+.place {
+    margin: auto 0;
+    width: 20%;
+    margin-right: 15px;
+}
+
+ h2 {
+    border-bottom: 3px solid #000;
+    font-size: 30px;
+}
+
+.back {
+    background-color: burlywood;
+    width: 100%;
+}
+
+textarea {
+    height: 150px;
+    margin-bottom: 30px;
+}
+
+input {
+   
+    height: 30px;
+}
+
+
+footer {
+    background-color: gray;
+    height:50px;
+   
+}
+
+.ball {
+margin: auto o;
+}
+
+.monkey p {
+    margin: 30px 0;
+}
+
+button {
+    color: #fff;
+    background-color: gray;
+    width: 100px;
+height: 50px;
+}
+
+h3 {
+font-size: 20px;
+border-bottom: 3px solid #000;
+margin-bottom: 30px;
+}
+
+@media (min-width:800px) {
+
+
+    nav{
+        margin-left: 40%;
+        
+    }
+    iframe {
+        width: 60%;
+    }
+
+    input {
+        width: 300px;
+    }
+
+    textarea {
+        width: 500px;
+    }
+    
+    .map iframe {
+        width: 700px;
+        height: 400px;
+    }
+
+    .place {
+        width: 20%;
+    }
+
+    .sns {
+        display: flex;
+    }
+
+    h1 {
+        font-size: 70px;
+    }
+
+    .monkey {
+  margin-left: 100px;
+    }
+
+    .logo {
+       margin-left: 100px;
+    }
+
+    .header-nav {
+        margin-left: 200px;
+    }
+
+    ul li {
+        margin: 30px;
+    
+    }
+
+    
+header {
+    display: flex;
+}
+}
+
+@media (max-width:600px) {
+
+   
+   
+    textarea {  
+    width: 200px;
+    }
+
+    input {
+        width: 250px;
+        justify-content: center;
+    }
+
+    .map iframe {
+        width: 200px;
+        height: 400px;
+    }
+
+    .place {
+       width: 100px;
+    }
+
+    .sns {
+        display: block;
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 50px;
+        text-align: center;
+    }
+
+    .monkey p{
+      text-align: center;
+    }
+
+    .logo {
+        justify-content: center;
+    }
+
+    .header-nav {
+        justify-content: center;
+    }
+    
+
+    ul li {
+        margin: 10px;
+    
+    }
+
+    
+header {
+    display: block;
+}
+}

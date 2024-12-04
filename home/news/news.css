@@ -1,0 +1,106 @@
+
+
+.top {
+    background-image: url(../news/choco.jpg);
+    height: 300px;
+    filter: grayscale(40%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.plus {
+    font-size: 20px;
+    margin: auto 0;
+}
+.logo {
+    display: flex;
+}
+
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin: auto 0;
+}
+
+
+
+
+.header-nav {
+    display: flex;
+    list-style: none;
+  
+}
+
+.header-title h1 {
+    text-align: center;
+    font-size: 50px;
+}
+
+ul li {
+    margin: 30px;
+    
+}
+
+ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+footer {
+    background-color: gray;
+    height:50px;
+}
+
+footer p {
+    color: #fff;
+    text-align: center;
+}
+
+main {
+    width: 65%;
+}
+
+aside {
+width: 30%;
+margin-left: 5%;
+}
+
+@media (min-width:800px) {
+
+    header {
+        display: flex;
+    }
+
+    nav {
+        margin-left: 40%;
+    }
+}
+
+@media (max-width:600px) {
+
+    header {
+        display: block;
+    }
+
+    .logo {
+        justify-content: center;
+    }
+
+    .header-nav {
+        justify-content: center;
+    }
+
+    body {
+        justify-content: center;
+    }
+    
+}
