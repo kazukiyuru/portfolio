@@ -1,0 +1,277 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+font-size: 16px;
+line-height: 1.6;
+color: #270407;
+font-family: 'Noto Sans JP', sans-serif;
+
+}
+
+section {
+    padding: 80px 0;
+}
+
+.header_logo {
+    margin: 0 auto;
+    text-align: center;
+    border: 30px 0;
+}
+
+.header_logo img {
+    width: 150px;
+    height: 150px;
+}
+
+nav {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgb(44, 5, 8) 100%);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li a {
+color: white;
+font-size: 18px;
+padding: 12px 60px;
+border: 1px dotted #f1ecec;
+
+}
+
+nav a {
+    display: block;
+}
+
+ a {
+text-decoration: none;
+ }
+
+ .top {
+    background-image: url(images/jacques-dillies-jcav1COVvOc-unsplash.jpg);
+    min-height: 500px;
+    background-size: cover;
+    align-items: center;
+    display: flex;
+} 
+
+
+ .sub {
+    max-width: 90%;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.top_cord p {
+    background: rgb(0, 0, 0);
+    font-size: 28px;
+    display: inline-block;
+    line-height: 0.1em;
+    margin: 10px 0;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.hid {
+    display: none;
+}
+
+h2 span {
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    color: #ed1c24;
+    letter-spacing: .2em;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.inner {
+    max-width: 90%;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+p+p {
+    margin-top: 15px;
+}
+
+.center_box h3 {
+    padding: 10px;
+    font-size: 18px;
+}
+
+.center {
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+.center_box {
+    width: 320px;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(30deg, rgba(0, 0, 0, 1) 0%, rgba(89, 14, 19, 1) 100%);
+    padding-bottom: 10px;
+}
+
+.center_box img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.center_wrap {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.recruit {
+    background-image: url(images/akson-1K8pIbIrhkQ-unsplash.jpg);
+    background-size: cover;
+}
+
+.recruit_btn {
+    text-align: center;
+    margin: 120px 0 50px;
+}
+
+.recruit_btn a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 14px 40px;
+    width: 260px;
+    color: #270407;
+    font-size: 18px;
+    background-color: rgba(241, 236, 236, 0.9);
+    transition: 0.3s;
+}
+
+a {
+    text-decoration: none;
+}
+
+.recruit_btn a::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #333333;
+    border-right: 2px solid #333333;
+    transform: rotate(45deg);
+}
+
+.recruit_wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recruit_box {
+    background-size: cover;
+    width: 25%;
+    height: 240px;
+    position: relative;
+}
+
+
+.recruit_box {
+    background-size: cover;
+    width: 25%;
+    height: 240px;
+    position: absolute;
+}
+
+.recruit_box img{
+   height:240px;
+   width: 240px;
+}
+
+ 
+
+
+.recruit_box a {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+img {
+    vertical-align: bottom;
+    max-width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer_nav_1 {
+    display: flex;
+    padding: 10px 0 40px;
+}
+
+.footer_nav_1 a {
+    padding: 0 20px;
+    border-left: 1px dotted #270407;
+}
+
+
+
+.footer_logo a {
+    display: inline-block;
+    padding: 20px 0;
+    width: 170px;
+}
+.footer a {
+    color: #270407;
+}
+
+a {
+    text-decoration: none;
+}
+
+.footer {
+    padding: 20px 0 0;
+    background: #f1ecec;
+    background: linear-gradient(0, rgb(224, 217, 217) 0%, rgb(244, 239, 239) 100%);
+}
+
+.footer_nav_2 {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+.footer_nav_2 a {
+    padding: 0 10px;
+}
+.footer a {
+    color: #270407;
+}
+a {
+    text-decoration: none;
+}
+
+.copy {
+    text-align: center;
+    color: #f1ecec;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(30deg, rgba(0, 0, 0, 1) 0%, rgba(89, 14, 19, 1) 100%);
+    font-size: 14px;
+    padding: 5px 0;
+    border-bottom: 3px solid #ed1c24;
+}
