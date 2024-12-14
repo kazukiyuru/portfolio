@@ -1,0 +1,179 @@
+body {
+    font-style: italic;
+    color: white;
+    background-color: gainsboro;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+section {
+    
+    background-color: black;
+}
+
+
+a:hover {
+    background-color: gainsboro;
+}
+
+#top {
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+filter: grayscale(80%);
+}
+
+#top p {
+position: absolute;
+
+}
+
+h1 {
+    
+    position: absolute;
+    margin-left: 30%;
+
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 40px;
+}
+
+#works {
+    text-align: center;
+  
+}
+
+
+#about {
+    justify-content: center;
+    text-align: center;
+align-items: center;
+}
+
+
+
+ul,li {
+list-style: none;
+padding: 20px;
+}
+
+ul {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+@media (min-width:800px) {
+
+  #top p {
+    margin-top: 50px;
+margin-left: 30%;
+  }
+
+section {
+    width: 100vw;
+    height: 100vh;
+}
+
+    .ball {
+        display: flex;
+        justify-content: center;
+    }
+
+        .vmd {
+            width: 400px;
+            height: 450px;
+        }
+        
+        .vmd img{
+            width: 400px;
+            height: 450px;
+            
+        }
+        
+        .cat {
+            width: 400px;
+            height: 450px;
+        }
+        
+        .cat img{
+            width: 400px;
+            height: 450px;
+            margin: 0 0 0 30px;
+        }
+        
+        .cat p {
+            margin:0 0 0 30px;
+        }
+
+        #top img {
+            width: 100vw;
+        }
+
+        h1 {
+            font-size: 3.0rem;
+        }
+}
+
+@media (max-width:700px) {
+
+    
+    h1 {
+        font-size: 1.2em;
+    }
+
+#top p {
+    margin-top: 100px;
+margin-left: 35%;
+}
+
+.cat p {
+    margin:0 0 0 20px;
+}
+
+   #works {
+    justify-content: center;
+   }
+
+    .ball {
+        display: block;
+        justify-content: center;
+    }
+
+    #top img {
+        width: 430px;
+    }
+
+    .vmd {
+        width: 200px;
+        height: 300px;
+    }
+    
+    .vmd img{
+        width: 200px;
+        height: 300px;
+        
+    }
+    
+    .cat {
+        width: 200px;
+        height: 300px;
+    }
+    
+    .cat img{
+        width: 200px;
+        height: 300px;
+    }
+    
+    
+
+
+}
