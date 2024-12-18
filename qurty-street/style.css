@@ -12,7 +12,6 @@ body {
 
 
 section {
-    
     background-color: black;
 }
 
@@ -34,6 +33,10 @@ position: absolute;
 
 }
 
+.ball {
+    justify-content: center;
+}
+
 h1 {
     
     position: absolute;
@@ -43,7 +46,7 @@ h1 {
 
 h2 {
     font-size: 2rem;
-    margin-top: 40px;
+    
 }
 
 #works {
@@ -56,7 +59,11 @@ h2 {
     justify-content: center;
     text-align: center;
 align-items: center;
+height: 150vh;
+padding-top: 100px;
 }
+
+
 
 
 
@@ -73,9 +80,10 @@ ul {
 
 @media (min-width:800px) {
 
+    
   #top p {
-    margin-top: 50px;
-margin-left: 30%;
+    margin-top: 200px;
+margin-left: 40%;
   }
 
 section {
@@ -85,7 +93,6 @@ section {
 
     .ball {
         display: flex;
-        justify-content: center;
     }
 
         .vmd {
@@ -121,17 +128,30 @@ section {
         h1 {
             font-size: 3.0rem;
         }
+
+        iframe {
+            width: 640px;
+            height: 400px;
+        }
+
+        h2 {
+            padding-top: 100px;
+            margin-bottom: 50px;
+        }
 }
 
 @media (max-width:700px) {
 
-    
+    h2 {
+        padding-top: 40px;
+    }
+   
     h1 {
         font-size: 1.2em;
     }
 
 #top p {
-    margin-top: 100px;
+    margin-top: 130px;
 margin-left: 35%;
 }
 
@@ -141,21 +161,22 @@ margin-left: 35%;
 
    #works {
     justify-content: center;
+    height: 100vh;
    }
 
-    .ball {
-        display: block;
-        justify-content: center;
-    }
 
     #top img {
         width: 430px;
     }
 
     .vmd {
+        margin-top: 50px;
         width: 200px;
         height: 300px;
+        margin-bottom: 100px;
     }
+
+   
     
     .vmd img{
         width: 200px;
@@ -173,7 +194,10 @@ margin-left: 35%;
         height: 300px;
     }
     
-    
+    iframe {
+        width: 400px;
+        height: 300px;
+    }
 
 
 }
