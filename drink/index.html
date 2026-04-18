@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自分の酒飲み</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="boss">
+    <h1>自分の酒飲み</h1>
+    <img src="beel.png" alt="">
+    </div>
+
+<h2>自分の酒飲みをランキング化しました。</h2>
+<p>具体的にはスプレッドシートで統計を取り、ピボットテーブルで本数をランキング化。
+<br>→グラフにしてGASを用いてGoogleスライドに貼り付けました。
+</p>
+
+<div class="boxa">
+    <div>
+<a href="1LnLlG2_uDod8zRg6amGdGXbJp_BaY-KJRKvGZVg8rY0">スプレッドシート</a>
+</div>
+
+<div>
+<a href="11jSMJLye8JAY4E93b82wTNOBN7wxiq-vO6Ie6vp8Vjc">googleスライド</a></div>
+</div>
+
+<h2>下のはgasのコードです</h2>
+<p>function createSlide() {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName("ピボット テーブル  1");
+      const rows = sheet.getRange(1,1,6,2).getValues();
+ 
+      const drive =DriveApp.getFileById("1LnLlG2_uDod8zRg6amGdGXbJp_BaY-KJRKvGZVg8rY0");
+     
+      const title = rows[0][0];
+      const piece =rows[0][1];
+      const most =rows[2][0];
+      const second =rows[3][0];
+      const out =rows[1][0];
+      const high =rows[4][0];
+ 
+ const comment =`最も飲んだのは${most}。2番目に${second}。${out},${high}は外呑み。`;
+ 
+ const charts =sheet.getCharts();
+ let chart =charts[0];
+ 
+ const File =DriveApp.getFileById("11jSMJLye8JAY4E93b82wTNOBN7wxiq-vO6Ie6vp8Vjc");
+ const Folder =DriveApp.getFolderById("11jSMJLye8JAY4E93b82wTNOBN7wxiq-vO6Ie6vp8Vjc");
+ const presentation =SlidesApp.openById("11jSMJLye8JAY4E93b82wTNOBN7wxiq-vO6Ie6vp8Vjc");
+ const slides =presentation.getSlides();
+ const slide =slides[0];
+ const shapes =slide.getShapes();
+ 
+ const titleShapes = shapes[0];
+ const titleRange = titleShapes.getText();
+ titleRange.setText(drive);
+ 
+ const commentShape = shapes[1];
+ const commentRange = commentShape.getText();
+ commentRange.setText(comment);
+ 
+ const image = slide.insertSheetsChartAsImage(chart);
+ 
+ image.scaleHeight(0.5)
+ .scaleWidth(0.5)
+ .alignOnPage(SlidesApp.AlignmentPosition.HORIZONTAL_CENTER)
+ .setTop(200);
+ 
+ const ui = SpreadsheetApp.getUi();
+ const btn =ui.ButtonSet.OK;
+   
+      //Logger.log(chart);
+ 
+ }
+ 
+ createSlide();
+ </p>
+
+</body>
+</html>

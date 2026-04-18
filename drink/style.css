@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.boss {
+    display: flex;
+    background-color: #DBD3C6;
+    justify-content: center;
+}
+
+body {
+background-color: #D0C0A7;
+text-align: center;
+}
+
+.boxa {
+    margin-top: 30px;
+justify-content: center;
+display: flex;
+}
+
+h1 {
+    margin: auto 0;
+}
+
+h2 {
+    border-bottom: 3px solid #DBD3C6;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+ background-color: #EBE6D2;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}

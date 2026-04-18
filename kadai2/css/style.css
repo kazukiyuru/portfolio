@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+    background-image:url(../images/kinga7.png) ;
+  background-repeat: no-repeat;
+    width:100%;
+    background-position-x:90% ;
+    background-position-y:20% ;
+}
+
+
+.container{
+max-width: 1500px;
+margin:0 auto;
+/*真ん中に寄せてる*/
+display: flex;
+/*縦並び→横並び*/
+justify-content: space-between;
+/*残り４％を埋めてる。*/
+}
+
+
+main{
+   
+    background-color: rgba(232, 238, 241, 0.9); /* 50% 不透過 */
+padding: 20px;
+}
+
+
+
+h3 {
+ 
+    border-bottom: 3px dotted #000;
+    background: #f4f4f4;
+    
+  }
+h3 i{
+    margin-right: 2rem;
+}
+
+aside{
+    background-color: rgba(232, 238, 241, 0.5);
+    margin-left: 5%;
+}
+
+a{
+color:#333;
+text-decoration: none;
+}
+
+a:hover{
+    color: #5f5f5f;
+    background: rgb(223,228,0);
+    background: linear-gradient(351deg, rgba(223,228,0,1) 0%, rgba(0,211,255,0.27512254901960786) 100%);
+}
+
+.title a{
+    font-family: 'Noto Serif JP', serif;
+    color: #f4f4f4;
+display: block;
+max-width: 1500px;
+}
+.title{
+  margin:0 auto;
+  max-width: 1500px;
+  background-color: #000;
+  
+}
+.title i{
+   
+    margin-right: 2rem;
+}
+
+.post-img{
+    width:200px;
+  
+}
+
+.post-title {
+  margin: 3rem 0 1rem;
+}
+
+.post-desc {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/*サイドバー*/
+li{
+    padding: 20px;
+    display: flex;
+    
+}
+
+
+/*========= LoadingのためのCSS ===============*/
+
+/* Loading背景画面設定　*/
+#splash {
+    /*fixedで全面に固定*/
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	background:#333;
+	text-align:center;
+	color:#fff;
+}
+
+/* Loading画像中央配置　*/
+#splash_logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* Loading アイコンの大きさ設定　*/
+#splash_logo img {
+	max-width: 800px;
+}
+
+/* fadeUpをするアイコンの動き */
+
+.fadeUp{
+animation-name: fadeUpAnime;
+animation-duration:0.5s;
+animation-fill-mode:forwards;
+opacity: 0;
+
+}
+
+@keyframes fadeUpAnime{
+  from {
+    opacity: 0;
+	transform: translateY(100px);
+	/*y軸方向に対しての100でふわっっと*/
+  }
+
+  to {
+    opacity: 1;
+	transform: translateY(0);
+  }
+}
+
+@media (min-width:600px){
+.title a{
+ padding: 3.5rem;
+ font-size:5rem;
+}
+
+ .post-desc {
+  font-size: 1rem;
+ }
+
+ main {
+  width: 60%;
+  font-size: 1.3rem;
+ }
+
+aside {
+  width: 35%;
+}
+
+h3 {
+  padding: 2rem;
+}
+
+}
+
+@media (max-width:700px){
+
+  main {
+    width: 65%;
+    font-size: 1rem;
+  }
+
+aside {
+  width: 40%;
+}
+
+  .post-desc {
+    font-size: 0.5rem;
+  }
+}
+/*========= レイアウトのためのCSS ===============*/

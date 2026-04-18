@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Works — バイブコーディング作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #fdf8f6;
+  --surface: #ffffff;
+  --surface2: #fdf0ed;
+  --border: rgba(180,60,40,0.12);
+  --text: #1a0a08;
+  --muted: #a06050;
+  --accent-easy: #e05c3a;
+  --accent-med: #c0392b;
+  --accent-hard: #8b1a10;
+  --accent-easy-dim: rgba(224,92,58,0.10);
+  --accent-med-dim: rgba(192,57,43,0.10);
+  --accent-hard-dim: rgba(139,26,16,0.10);
+  --mono: 'Space Mono', monospace;
+  --body: 'Noto Sans JP', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--body); min-height: 100vh; overflow-x: hidden; }
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(253,248,246,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.nav-brand { font-family: var(--mono); font-size: 14px; color: var(--text); letter-spacing: 0.1em; }
+.nav-brand span { color: var(--accent-easy); }
+.nav-tabs { display: flex; gap: 4px; }
+.nav-tab {
+  font-size: 12px; font-family: var(--mono);
+  padding: 6px 12px; border-radius: 6px;
+  cursor: pointer; border: none; background: transparent;
+  color: var(--muted); transition: all 0.2s;
+}
+.nav-tab:hover, .nav-tab.active { color: var(--text); background: var(--surface2); }
+
+.hero {
+  padding: 5rem 2rem 4rem; text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(224,92,58,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent-easy); margin-bottom: 1rem; text-transform: uppercase; }
+.hero h1 {
+  font-family: var(--mono); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.15;
+  background: linear-gradient(135deg, #1a0a08 0%, #c0392b 50%, #e05c3a 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 1rem;
+}
+.hero-sub { font-size: 15px; color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.hero-stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat-num { font-family: var(--mono); font-size: 28px; font-weight: 700; }
+.stat-num.g { color: var(--accent-easy); }
+.stat-num.b { color: var(--accent-med); }
+.stat-num.r { color: var(--accent-hard); }
+.stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; letter-spacing: 0.05em; }
+
+.section { padding: 2rem 2rem 1rem; max-width: 1100px; margin: 0 auto; }
+.level-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 1.5rem; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.level-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.level-dot.easy { background: var(--accent-easy); }
+.level-dot.med { background: var(--accent-med); }
+.level-dot.hard { background: var(--accent-hard); }
+.level-title { font-family: var(--mono); font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; }
+.level-title.easy { color: var(--accent-easy); }
+.level-title.med { color: var(--accent-med); }
+.level-title.hard { color: var(--accent-hard); }
+.level-count { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: auto; }
+
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; margin-bottom: 3rem; }
+.app-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden; cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  display: flex; flex-direction: column;
+}
+.app-card:hover { transform: translateY(-3px); }
+.app-card.easy:hover { border-color: rgba(224,92,58,0.5); box-shadow: 0 8px 32px rgba(224,92,58,0.10); }
+.app-card.med:hover { border-color: rgba(192,57,43,0.5); box-shadow: 0 8px 32px rgba(192,57,43,0.10); }
+.app-card.hard:hover { border-color: rgba(139,26,16,0.5); box-shadow: 0 8px 32px rgba(139,26,16,0.10); }
+.card-header { padding: 1.25rem 1.25rem 1rem; display: flex; align-items: flex-start; gap: 12px; }
+.card-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+.card-meta { flex: 1; }
+.card-title { font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+.card-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.card-badge { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; flex-shrink: 0; }
+.card-badge.easy { background: var(--accent-easy-dim); color: var(--accent-easy); }
+.card-badge.med { background: var(--accent-med-dim); color: var(--accent-med); }
+.card-badge.hard { background: var(--accent-hard-dim); color: var(--accent-hard); }
+.card-open-btn {
+  margin: 0 1.25rem 1.25rem; padding: 9px;
+  width: calc(100% - 2.5rem); border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--muted);
+  font-size: 12px; font-family: var(--mono); cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em;
+}
+.app-card.easy .card-open-btn:hover { border-color: var(--accent-easy); color: var(--accent-easy); background: var(--accent-easy-dim); }
+.app-card.med .card-open-btn:hover { border-color: var(--accent-med); color: var(--accent-med); background: var(--accent-med-dim); }
+.app-card.hard .card-open-btn:hover { border-color: var(--accent-hard); color: var(--accent-hard); background: var(--accent-hard-dim); }
+
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+  overflow-y: auto; padding: 2rem 1rem;
+}
+.modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+.modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; width: 100%; max-width: 780px; overflow: hidden;
+  animation: modalIn 0.25s ease;
+}
+@keyframes modalIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.modal-header {
+  padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.modal-header .icon { font-size: 24px; }
+.modal-header h2 { font-size: 16px; font-weight: 500; flex: 1; }
+.modal-close {
+  width: 32px; height: 32px; border-radius: 8px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--muted); cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.modal-close:hover { background: var(--surface2); color: var(--text); }
+.modal-body { padding: 1.5rem; }
+
+.app-input {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text);
+  padding: 8px 12px; font-size: 13px; font-family: var(--body);
+  width: 100%; outline: none; transition: border-color 0.2s;
+}
+.app-input:focus { border-color: rgba(123,140,255,0.5); }
+.app-select {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text);
+  padding: 8px 12px; font-size: 13px; font-family: var(--body); outline: none; cursor: pointer;
+}
+.app-btn {
+  padding: 9px 16px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text);
+  font-size: 13px; font-family: var(--body); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.app-btn:hover { background: rgba(255,255,255,0.08); }
+.app-btn.primary { background: var(--accent-med); color: #fff; border-color: transparent; font-weight: 500; }
+.app-btn.primary:hover { background: var(--accent-easy); }
+
+.oracle-signs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 1.5rem; }
+.sign-btn { padding: 7px 13px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.sign-btn:hover, .sign-btn.active { border-color: var(--accent-med); color: var(--accent-med); background: var(--accent-med-dim); }
+.oracle-result { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-top: 1rem; font-size: 14px; line-height: 1.8; color: var(--text); }
+.oracle-stars { color: var(--accent-easy); font-size: 18px; margin-bottom: 8px; display: block; text-align: center; }
+
+.habit-row { display: flex; gap: 8px; margin-bottom: 1rem; }
+.habits-list { display: flex; flex-direction: column; gap: 8px; margin-top: 1rem; }
+.habit-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
+.habit-check { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.15s; flex-shrink: 0; }
+.habit-check.checked { background: var(--accent-easy); border-color: var(--accent-easy); color: #fff; }
+.habit-name { flex: 1; font-size: 14px; }
+.habit-streak { font-family: var(--mono); font-size: 12px; color: #ff9500; }
+.habit-del { font-size: 16px; color: var(--muted); cursor: pointer; background: none; border: none; padding: 2px 6px; }
+.habit-del:hover { color: var(--accent-hard); }
+
+.pomo-wrap { text-align: center; }
+.pomo-circle-wrap { display: flex; justify-content: center; margin: 1.5rem 0; }
+.pomo-circle { position: relative; width: 180px; height: 180px; }
+.pomo-circle svg { transform: rotate(-90deg); }
+.pomo-time { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.pomo-digits { font-family: var(--mono); font-size: 36px; font-weight: 700; color: var(--text); }
+.pomo-phase { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; margin-top: 4px; text-transform: uppercase; }
+.pomo-btns { display: flex; gap: 8px; justify-content: center; margin-bottom: 1rem; }
+.pomo-sessions { display: flex; gap: 6px; justify-content: center; margin-top: 1rem; }
+.pomo-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
+.pomo-dot.done { background: var(--accent-med); }
+.note-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.note-textarea { font-family: var(--body); resize: vertical; min-height: 140px; }
+.note-result { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 13px; line-height: 1.7; color: var(--text); margin-top: 12px; min-height: 60px; white-space: pre-wrap; }
+.note-result.loading { color: var(--muted); font-style: italic; }
+
+.cal-goal-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.cal-bar-bg { background: var(--surface2); border-radius: 999px; height: 12px; overflow: hidden; margin: 6px 0; }
+.cal-bar { height: 100%; border-radius: 999px; background: var(--accent-med); transition: width 0.4s; }
+.cal-bar.over { background: var(--accent-hard); }
+.cal-bar.done { background: var(--accent-easy); }.cal-num { font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--accent-med); }
+.cal-presets { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+.preset-btn { padding: 5px 10px; border-radius: 6px; font-size: 11px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); cursor: pointer; transition: all 0.15s; }
+.preset-btn:hover { border-color: var(--accent-med); color: var(--accent-med); }
+.cal-list { display: flex; flex-direction: column; gap: 6px; max-height: 160px; overflow-y: auto; margin-top: 8px; }
+.cal-item { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 6px 10px; background: var(--surface2); border-radius: 6px; }
+
+.fin-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 1.5rem; }
+.fin-metric { background: var(--surface2); border-radius: 10px; padding: 12px; text-align: center; }
+.fin-metric-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+.fin-metric-val { font-family: var(--mono); font-size: 18px; font-weight: 700; }
+.fin-metric-val.inc { color: var(--accent-easy); }
+.fin-metric-val.exp { color: var(--accent-hard); }
+.fin-metric-val.bal { color: var(--accent-med); }.fin-add-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+.fin-add-row .app-input, .fin-add-row .app-select { flex: 1; min-width: 80px; }
+.fin-list { max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; margin: 8px 0; }
+.fin-item { display: flex; justify-content: space-between; font-size: 12px; padding: 6px 10px; background: var(--surface2); border-radius: 6px; }
+.fin-ai-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 13px; line-height: 1.7; color: var(--text); min-height: 48px; margin-top: 8px; }
+
+.chat-name-row { display: flex; gap: 8px; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+.chat-online { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.chat-chip { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); }
+.chat-msgs { height: 220px; overflow-y: auto; background: var(--surface2); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+.chat-bubble-wrap { display: flex; flex-direction: column; }
+.chat-bubble-wrap.me { align-items: flex-end; }
+.chat-bubble-wrap.other { align-items: flex-start; }
+.chat-bubble-wrap.ai-sum { align-items: center; }
+.chat-meta { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
+.chat-bubble { padding: 7px 12px; border-radius: 12px; font-size: 13px; line-height: 1.5; max-width: 80%; }
+.chat-bubble-wrap.me .chat-bubble { background: var(--accent-med); color: #fff; border-bottom-right-radius: 3px; }
+.chat-bubble-wrap.other .chat-bubble { background: var(--surface); border: 1px solid var(--border); border-bottom-left-radius: 3px; }
+.chat-bubble-wrap.ai-sum .chat-bubble { background: var(--accent-hard-dim); border: 1px solid rgba(255,107,107,0.2); color: var(--accent-hard); font-size: 12px; text-align: center; }
+.chat-input-row { display: flex; gap: 8px; }
+
+.spin { display: inline-block; width: 12px; height: 12px; border: 2px solid var(--border); border-top-color: var(--muted); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+footer p { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
+footer span { color: var(--accent-easy); }
+
+/* PFC bars */
+.pfc-wrap { margin-top: 12px; }
+.pfc-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+.pfc-label { width: 12px; font-family: var(--mono); font-size: 11px; color: var(--muted); font-weight: 700; }
+.pfc-bar-bg { flex: 1; background: var(--surface2); border-radius: 999px; height: 7px; overflow: hidden; border: 1px solid var(--border); }
+.pfc-bar { height: 100%; border-radius: 999px; transition: width 0.4s; }
+.pfc-val { width: 80px; text-align: right; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+/* API key button */
+.api-key-btn { font-size: 11px; font-family: var(--mono); padding: 5px 10px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--muted); transition: all 0.2s; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.api-key-btn:hover { color: var(--text); background: var(--surface2); }
+.api-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.api-dot.set { background: #52c41a; }
+.api-dot.unset { background: var(--accent-easy); }
+
+@media (max-width: 640px) {
+  nav {
+    padding: 0 1rem;
+    flex-direction: column;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 8px;
+  }
+  .nav-tabs {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .nav-tab {
+    flex: 1;
+    text-align: center;
+    padding: 6px 4px;
+    font-size: 11px;
+  }
+
+  .hero { padding: 3rem 1rem 2.5rem; }
+  .hero-stats { gap: 1.25rem; }
+  .stat-num { font-size: 22px; }
+
+  .section { padding: 1.5rem 1rem 0.5rem; }
+  .cards-grid { grid-template-columns: 1fr; gap: 10px; }
+
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal {
+    border-radius: 20px 20px 0 0;
+    max-width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  .modal-body { padding: 1rem; }
+  .modal-header { padding: 1rem 1rem; }
+
+  .fin-metrics { grid-template-columns: repeat(3,1fr); gap: 6px; }
+  .fin-metric-val { font-size: 14px; }
+  .fin-add-row { flex-wrap: wrap; }
+  .fin-add-row .app-input, .fin-add-row .app-select { min-width: 0; }
+
+  .pomo-circle { width: 160px; height: 160px; }
+  .pomo-circle svg { width: 160px; height: 160px; }
+  .pomo-digits { font-size: 30px; }
+
+  .cal-goal-row { gap: 6px; }
+  .habit-row { flex-wrap: wrap; }
+
+  .chat-name-row { flex-wrap: wrap; }
+  .chat-msgs { height: 180px; }
+
+  .note-actions { gap: 4px; }
+  .note-actions .app-btn { flex: 1; min-width: 0; padding: 8px 4px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">VIBE<span>_</span>WORKS</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="filterLevel('all',this)">すべて</button>
+    <button class="nav-tab" onclick="filterLevel('easy',this)">かんたん</button>
+    <button class="nav-tab" onclick="filterLevel('med',this)">ふつう</button>
+    <button class="nav-tab" onclick="filterLevel('hard',this)">むずかしい</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">// バイブコーディング作品集</div>
+  <h1>Vibe Works</h1>
+  <p class="hero-sub">AIと一緒に作った5つのアプリ。<br>難易度別に整理した全作品ポートフォリオ。</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num g">1</div><div class="stat-label">かんたん</div></div>
+    <div class="stat"><div class="stat-num b">2</div><div class="stat-label">ふつう</div></div>
+    <div class="stat"><div class="stat-num r">2</div><div class="stat-label">むずかしい</div></div>
+  </div>
+</div>
+
+<div id="section-easy" class="section">
+  <div class="level-header">
+    <div class="level-dot easy"></div>
+    <span class="level-title easy">かんたん</span>
+    <span class="level-count">1 app</span>
+  </div>
+  <div class="cards-grid">
+    <div class="app-card easy" onclick="openApp('habit')">
+      <div class="card-header">
+        <div class="card-icon">✅</div>
+        <div class="card-meta">
+          <div class="card-title">習慣トラッカー</div>
+          <div class="card-desc">毎日の習慣チェック・🔥ストリーク表示・localStorage保存。</div>
+        </div>
+        <div class="card-badge easy">EASY</div>
+      </div>
+      <button class="card-open-btn" onclick="event.stopPropagation();openApp('habit')">開いて試す →</button>
+    </div>
+  </div>
+</div>
+
+<div id="section-med" class="section">
+  <div class="level-header">
+    <div class="level-dot med"></div>
+    <span class="level-title med">ふつう</span>
+    <span class="level-count">2 apps</span>
+  </div>
+  <div class="cards-grid">
+    <div class="app-card med" onclick="openApp('pomo')">
+      <div class="card-header">
+        <div class="card-icon">🍅</div>
+        <div class="card-meta">
+          <div class="card-title">ポモドーロタイマー</div>
+          <div class="card-desc">25分/5分タイマー・円形プログレスバー・セッションカウント。</div>
+        </div>
+        <div class="card-badge med">MED</div>
+      </div>
+      <button class="card-open-btn" onclick="event.stopPropagation();openApp('pomo')">開いて試す →</button>
+    </div>
+    <div class="app-card med" onclick="openApp('cal')">
+      <div class="card-header">
+        <div class="card-icon">🍱</div>
+        <div class="card-meta">
+          <div class="card-title">カロリー管理</div>
+          <div class="card-desc">プリセット食品クイック追加・目標設定・プログレスバー表示。</div>
+        </div>
+        <div class="card-badge med">MED</div>
+      </div>
+      <button class="card-open-btn" onclick="event.stopPropagation();openApp('cal')">開いて試す →</button>
+    </div>
+  </div>
+</div>
+
+<div id="section-hard" class="section">
+  <div class="level-header">
+    <div class="level-dot hard"></div>
+    <span class="level-title hard">むずかしい</span>
+    <span class="level-count">2 apps</span>
+  </div>
+  <div class="cards-grid">
+    <div class="app-card hard" onclick="openApp('finance')">
+      <div class="card-header">
+        <div class="card-icon">💰</div>
+        <div class="card-meta">
+          <div class="card-title">AI家計管理</div>
+          <div class="card-desc">収支記録・カテゴリ別グラフ・AIが使いすぎを分析してアドバイス。</div>
+        </div>
+        <div class="card-badge hard">HARD</div>
+      </div>
+      <button class="card-open-btn" onclick="event.stopPropagation();openApp('finance')">開いて試す →</button>
+    </div>
+    <div class="app-card hard" onclick="openApp('chat')">
+      <div class="card-header">
+        <div class="card-icon">💬</div>
+        <div class="card-meta">
+          <div class="card-title">リアルタイムチャット</div>
+          <div class="card-desc">多人数チャット + 5件ごとにAIが会話を自動要約するボット。</div>
+        </div>
+        <div class="card-badge hard">HARD</div>
+      </div>
+      <button class="card-open-btn" onclick="event.stopPropagation();openApp('chat')">開いて試す →</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>VIBE<span>_</span>WORKS &mdash; Built with Claude &times; バイブコーディング</p>
+</footer>
+
+<!-- HABIT MODAL -->
+<div class="modal-overlay" id="modal-habit">
+<div class="modal">
+  <div class="modal-header">
+    <span class="icon">✅</span><h2>習慣トラッカー</h2>
+    <div class="card-badge easy" style="margin-right:8px">EASY</div>
+    <button class="modal-close" onclick="closeModal('habit')">✕</button>
+  </div>
+  <div class="modal-body">
+    <div class="habit-row">
+      <input class="app-input" id="habit-input" placeholder="新しい習慣を追加（例：水を飲む）" onkeydown="if(event.key==='Enter')addHabit()">
+      <button class="app-btn primary" onclick="addHabit()">追加</button>
+    </div>
+    <div class="habits-list" id="habits-list"></div>
+  </div>
+</div>
+</div>
+
+<!-- POMODORO MODAL -->
+<div class="modal-overlay" id="modal-pomo">
+<div class="modal">
+  <div class="modal-header">
+    <span class="icon">🍅</span><h2>ポモドーロタイマー</h2>
+    <div class="card-badge med" style="margin-right:8px">MED</div>
+    <button class="modal-close" onclick="closeModal('pomo')">✕</button>
+  </div>
+  <div class="modal-body">
+    <div class="pomo-wrap">
+      <div class="pomo-circle-wrap">
+        <div class="pomo-circle">
+          <svg width="180" height="180" viewBox="0 0 180 180">
+            <circle cx="90" cy="90" r="80" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
+            <circle id="pomo-arc" cx="90" cy="90" r="80" fill="none" stroke="#c0392b" stroke-width="10"
+              stroke-dasharray="502.65" stroke-dashoffset="0" stroke-linecap="round"/>
+          </svg>
+          <div class="pomo-time">
+            <div class="pomo-digits" id="pomo-digits">25:00</div>
+            <div class="pomo-phase" id="pomo-phase">集中</div>
+          </div>
+        </div>
+      </div>
+      <div class="pomo-btns">
+        <button class="app-btn" id="pomo-pause-btn" onclick="pomoPause()">▶ スタート</button>
+        <button class="app-btn" onclick="pomoReset()">↺ リセット</button>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">今日のセッション</div>
+      <div class="pomo-sessions" id="pomo-sessions"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CALORIE MODAL -->
+<div class="modal-overlay" id="modal-cal">
+<div class="modal">
+  <div class="modal-header">
+    <span class="icon">🍱</span><h2>カロリー管理</h2>
+    <div class="card-badge med" style="margin-right:8px">MED</div>
+    <button class="modal-close" onclick="closeModal('cal')">✕</button>
+  </div>
+  <div class="modal-body">
+    <div class="cal-goal-row">
+      <span style="font-size:13px;color:var(--muted)">目標:</span>
+      <input class="app-input" id="cal-goal" type="number" value="2000" style="width:90px" oninput="renderCalList()">
+      <span style="font-size:13px;color:var(--muted)">kcal</span>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">
+        <div class="cal-num" id="cal-today">0</div>
+        <span style="font-size:12px;color:var(--muted)" id="cal-remain">残り 2000 kcal</span>
+      </div>
+      <div class="cal-bar-bg"><div class="cal-bar" id="cal-bar" style="width:0%"></div></div>
+    </div>
+    <div class="pfc-wrap">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-family:var(--mono);letter-spacing:0.05em">PFCバランス</div>
+      <div class="pfc-row">
+        <span class="pfc-label">P</span>
+        <div class="pfc-bar-bg"><div class="pfc-bar" id="pfc-bar-p" style="width:0%;background:#e05c3a"></div></div>
+        <span class="pfc-val" id="pfc-num-p">0g (0%)</span>
+      </div>
+      <div class="pfc-row">
+        <span class="pfc-label">F</span>
+        <div class="pfc-bar-bg"><div class="pfc-bar" id="pfc-bar-f" style="width:0%;background:#c0392b"></div></div>
+        <span class="pfc-val" id="pfc-num-f">0g (0%)</span>
+      </div>
+      <div class="pfc-row">
+        <span class="pfc-label">C</span>
+        <div class="pfc-bar-bg"><div class="pfc-bar" id="pfc-bar-c" style="width:0%;background:#8b1a10"></div></div>
+        <span class="pfc-val" id="pfc-num-c">0g (0%)</span>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin:1rem 0 6px">クイック追加（タップで即追加）</div>
+    <div class="cal-presets" id="cal-presets"></div>
+    <div style="font-size:12px;color:var(--muted);margin:1rem 0 6px">カスタム追加</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
+      <input class="app-input" id="cal-name" placeholder="食品名" style="flex:2;min-width:80px">
+      <input class="app-input" id="cal-kcal" type="number" placeholder="kcal" style="flex:1;min-width:60px">
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+      <input class="app-input" id="cal-p" type="number" placeholder="タンパク質 g" style="flex:1;min-width:60px">
+      <input class="app-input" id="cal-f" type="number" placeholder="脂質 g" style="flex:1;min-width:60px">
+      <input class="app-input" id="cal-c" type="number" placeholder="炭水化物 g" style="flex:1;min-width:60px">
+      <button class="app-btn primary" onclick="addCalEntry()">追加</button>
+    </div>
+    <div class="cal-list" id="cal-list"></div>
+  </div>
+</div>
+</div>
+
+<!-- FINANCE MODAL -->
+<div class="modal-overlay" id="modal-finance">
+<div class="modal">
+  <div class="modal-header">
+    <span class="icon">💰</span><h2>AI家計管理</h2>
+    <div class="card-badge hard" style="margin-right:8px">HARD</div>
+    <button class="modal-close" onclick="closeModal('finance')">✕</button>
+  </div>
+  <div class="modal-body">
+    <div class="fin-metrics">
+      <div class="fin-metric"><div class="fin-metric-label">収入</div><div class="fin-metric-val inc" id="fin-inc">¥0</div></div>
+      <div class="fin-metric"><div class="fin-metric-label">支出</div><div class="fin-metric-val exp" id="fin-exp">¥0</div></div>
+      <div class="fin-metric"><div class="fin-metric-label">残高</div><div class="fin-metric-val bal" id="fin-bal">¥0</div></div>
+    </div>
+    <div class="fin-add-row">
+      <select class="app-select" id="fin-type" onchange="finUpdateCats()"><option value="income">収入</option><option value="expense">支出</option></select>
+      <select class="app-select" id="fin-cat">
+        <option>給料</option><option>事業所得</option><option>副業</option><option>臨時収入</option><option>投資収益</option><option>その他</option>
+      </select>
+      <input class="app-input" id="fin-amount" type="number" placeholder="金額" style="max-width:110px" onkeydown="if(event.key==='Enter')finAdd()">
+      <button class="app-btn primary" onclick="finAdd()">追加</button>
+    </div>
+    <div style="position:relative;height:160px;margin:8px 0">
+      <canvas id="fin-chart" role="img" aria-label="支出カテゴリ別グラフ">支出データ</canvas>
+    </div>
+    <div class="fin-list" id="fin-list"></div>
+  </div>
+</div>
+</div>
+
+<!-- CHAT MODAL -->
+<div class="modal-overlay" id="modal-chat">
+<div class="modal">
+  <div class="modal-header">
+    <span class="icon">💬</span><h2>リアルタイムチャット</h2>
+    <div class="card-badge hard" style="margin-right:8px">HARD</div>
+    <button class="modal-close" onclick="closeModal('chat')">✕</button>
+  </div>
+  <div class="modal-body">
+    <div class="chat-name-row">
+      <span style="font-size:12px;color:var(--muted)">名前:</span>
+      <input class="app-input" id="chat-name" value="ユーザー1" maxlength="12" style="max-width:140px">
+      <button class="app-btn" onclick="chatAddBot()">ボット参加 +</button>
+    </div>
+    <div class="chat-online" id="chat-online"></div>
+    <div class="chat-msgs" id="chat-msgs">
+      <div style="text-align:center;font-size:12px;color:var(--muted);padding:1rem 0">メッセージを送ってみましょう。5件ごとにAIが要約します。</div>
+    </div>
+    <div class="chat-input-row">
+      <input class="app-input" id="chat-input" placeholder="メッセージを入力..." onkeydown="if(event.key==='Enter')chatSend()">
+      <button class="app-btn primary" onclick="chatSend()">送信</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// ── NAV FILTER ──
+function filterLevel(level, btn) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  ['easy','med','hard'].forEach(l => {
+    document.getElementById('section-' + l).style.display = (level === 'all' || level === l) ? '' : 'none';
+  });
+}
+
+// ── MODAL ──
+function openApp(id) {
+  document.getElementById('modal-' + id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if(id === 'habit') renderHabits();
+  if(id === 'oracle') initOracle();
+  if(id === 'cal') renderCalList();
+  if(id === 'pomo') updatePomoDisplay();
+  if(id === 'chat') initChat();
+  if(id === 'finance') finUpdateCats();
+}
+function closeModal(id) {
+  document.getElementById('modal-' + id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => {
+    if(e.target === o) closeModal(o.id.replace('modal-',''));
+  });
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(o => o.classList.remove('open'));
+});
+
+
+
+// ═══ HABIT ═══
+function getHabits() { return JSON.parse(localStorage.getItem('vw_habits') || '[]'); }
+function saveHabits(h) { localStorage.setItem('vw_habits', JSON.stringify(h)); }
+function addHabit() {
+  const inp = document.getElementById('habit-input');
+  const name = inp.value.trim(); if(!name) return;
+  const habits = getHabits();
+  habits.push({ name, streak: 0, lastChecked: '' });
+  saveHabits(habits); inp.value = ''; renderHabits();
+}
+function renderHabits() {
+  const habits = getHabits();
+  const today = new Date().toDateString();
+  const list = document.getElementById('habits-list');
+  if(!habits.length) { list.innerHTML = '<p style="font-size:13px;color:var(--muted)">まだ習慣がありません。上から追加してください。</p>'; return; }
+  list.innerHTML = habits.map((h, i) => {
+    const checked = h.lastChecked === today;
+    return `<div class="habit-item">
+      <div class="habit-check ${checked ? 'checked' : ''}" onclick="toggleHabit(${i})">${checked ? '✓' : ''}</div>
+      <span class="habit-name">${h.name}</span>
+      ${h.streak > 0 ? `<span class="habit-streak">🔥 ${h.streak}日</span>` : ''}
+      <button class="habit-del" onclick="delHabit(${i})">×</button>
+    </div>`;
+  }).join('');
+}
+function toggleHabit(i) {
+  const habits = getHabits();
+  const today = new Date().toDateString();
+  const yesterday = new Date(Date.now() - 86400000).toDateString();
+  const h = habits[i];
+  if(h.lastChecked === today) { h.lastChecked = ''; h.streak = Math.max(0, h.streak - 1); }
+  else { h.streak = (h.lastChecked === yesterday) ? h.streak + 1 : 1; h.lastChecked = today; }
+  saveHabits(habits); renderHabits();
+}
+function delHabit(i) { const h = getHabits(); h.splice(i, 1); saveHabits(h); renderHabits(); }
+
+// ═══ POMODORO ═══
+let pomoState = { running: false, phase: 'work', remaining: 25*60, sessions: 0, interval: null };
+function updatePomoDisplay() {
+  const m = String(Math.floor(pomoState.remaining / 60)).padStart(2, '0');
+  const s = String(pomoState.remaining % 60).padStart(2, '0');
+  document.getElementById('pomo-digits').textContent = `${m}:${s}`;
+  document.getElementById('pomo-phase').textContent = pomoState.phase === 'work' ? '集中' : '休憩';
+  const total = pomoState.phase === 'work' ? 25*60 : 5*60;
+  const frac = (total - pomoState.remaining) / total;
+  const circ = 2 * Math.PI * 80;
+  const arc = document.getElementById('pomo-arc');
+  arc.setAttribute('stroke-dashoffset', String(circ * (1 - frac)));
+  arc.setAttribute('stroke', pomoState.phase === 'work' ? '#c0392b' : '#e05c3a');
+  const wrap = document.getElementById('pomo-sessions');
+  if(wrap) wrap.innerHTML = Array.from({length:4}, (_, i) => `<div class="pomo-dot${i < pomoState.sessions ? ' done' : ''}"></div>`).join('');
+}
+function pomoPause() {
+  const btn = document.getElementById('pomo-pause-btn');
+  if(pomoState.running) { clearInterval(pomoState.interval); pomoState.running = false; btn.textContent = '▶ 再開'; }
+  else {
+    pomoState.running = true; btn.textContent = '⏸ 一時停止';
+    pomoState.interval = setInterval(() => {
+      pomoState.remaining--;
+      if(pomoState.remaining <= 0) {
+        if(pomoState.phase === 'work') { pomoState.sessions = Math.min(4, pomoState.sessions + 1); pomoState.phase = 'break'; pomoState.remaining = 5*60; }
+        else { pomoState.phase = 'work'; pomoState.remaining = 25*60; }
+      }
+      updatePomoDisplay();
+    }, 1000);
+  }
+}
+function pomoReset() {
+  clearInterval(pomoState.interval);
+  pomoState = { running: false, phase: 'work', remaining: 25*60, sessions: 0, interval: null };
+  const btn = document.getElementById('pomo-pause-btn');
+  if(btn) btn.textContent = '▶ スタート';
+  updatePomoDisplay();
+}
+
+
+// ═══ CALORIE ═══
+const CAL_PRESETS = [
+  {name:'白米',   kcal:252, p:4.4,  f:0.5,  c:55.7},
+  {name:'ラーメン',kcal:500, p:18,   f:12,   c:72},
+  {name:'カレー', kcal:650, p:20,   f:22,   c:82},
+  {name:'サラダ', kcal:80,  p:3,    f:4,    c:8},
+  {name:'コーヒー',kcal:10, p:0.2,  f:0.1,  c:2},
+  {name:'バナナ', kcal:90,  p:1.1,  f:0.2,  c:22},
+  {name:'チョコ', kcal:150, p:2,    f:9,    c:17},
+  {name:'から揚げ',kcal:390, p:22,  f:25,   c:18}
+];
+let calEntries = JSON.parse(localStorage.getItem('vw_cal') || '[]');
+function renderCalList() {
+  const wrap = document.getElementById('cal-presets');
+  if(!wrap.children.length) {
+    CAL_PRESETS.forEach(p => {
+      const b = document.createElement('button');
+      b.className = 'preset-btn'; b.textContent = `${p.name} ${p.kcal}kcal`;
+      b.onclick = () => {
+        document.getElementById('cal-name').value = p.name;
+        document.getElementById('cal-kcal').value = p.kcal;
+        document.getElementById('cal-p').value = p.p || '';
+        document.getElementById('cal-f').value = p.f || '';
+        document.getElementById('cal-c').value = p.c || '';
+        addCalEntry();
+      };
+      wrap.appendChild(b);
+    });
+  }
+  const today = new Date().toDateString();
+  const todayE = calEntries.filter(e => e.date === today);
+  const total  = todayE.reduce((s, e) => s + e.kcal, 0);
+  const totalP = todayE.reduce((s, e) => s + (e.p || 0), 0);
+  const totalF = todayE.reduce((s, e) => s + (e.f || 0), 0);
+  const totalC = todayE.reduce((s, e) => s + (e.c || 0), 0);
+  const goal = parseInt(document.getElementById('cal-goal').value) || 2000;
+  const pct = Math.min(100, Math.round(total / goal * 100));
+  document.getElementById('cal-today').textContent = total;
+  document.getElementById('cal-remain').textContent = `残り ${Math.max(0, goal - total)} kcal`;
+  const bar = document.getElementById('cal-bar');
+  bar.style.width = pct + '%';
+  bar.className = 'cal-bar' + (total > goal ? ' over' : total >= goal ? ' done' : '');
+  const pfcSum = totalP + totalF + totalC;
+  [['p', totalP], ['f', totalF], ['c', totalC]].forEach(([k, val]) => {
+    const pfcPct = pfcSum > 0 ? Math.round(val / pfcSum * 100) : 0;
+    const barEl = document.getElementById(`pfc-bar-${k}`);
+    const numEl = document.getElementById(`pfc-num-${k}`);
+    if(barEl) barEl.style.width = pfcPct + '%';
+    if(numEl) numEl.textContent = `${Math.round(val)}g (${pfcPct}%)`;
+  });
+  document.getElementById('cal-list').innerHTML = todayE.length
+    ? [...todayE].reverse().map(e => `<div class="cal-item"><span>${e.name}</span><span style="font-family:var(--mono);color:var(--accent-med)">${e.kcal} kcal</span></div>`).join('')
+    : '<p style="font-size:12px;color:var(--muted)">今日の記録はまだありません。</p>';
+}
+function addCalEntry() {
+  const name = document.getElementById('cal-name').value.trim();
+  const kcal = parseInt(document.getElementById('cal-kcal').value);
+  if(!name || !kcal) return;
+  const p = parseFloat(document.getElementById('cal-p').value) || 0;
+  const f = parseFloat(document.getElementById('cal-f').value) || 0;
+  const c = parseFloat(document.getElementById('cal-c').value) || 0;
+  calEntries.push({ name, kcal, p, f, c, date: new Date().toDateString() });
+  localStorage.setItem('vw_cal', JSON.stringify(calEntries));
+  ['cal-name','cal-kcal','cal-p','cal-f','cal-c'].forEach(id => { document.getElementById(id).value = ''; });
+  renderCalList();
+}
+
+// ═══ FINANCE ═══
+let finEntries = [];
+let finChart = null;
+const FIN_COLORS = ['#e05c3a','#c0392b','#8b1a10','#d4856a','#b05040','#903020'];
+const finCatColor = {};
+let finColorIdx = 0;
+function getFinColor(cat) { if(!finCatColor[cat]) finCatColor[cat] = FIN_COLORS[finColorIdx++ % FIN_COLORS.length]; return finCatColor[cat]; }
+function fmtYen(n) { return '¥' + Math.round(n).toLocaleString('ja-JP'); }
+function finAdd() {
+  const type = document.getElementById('fin-type').value;
+  const cat = document.getElementById('fin-cat').value;
+  const amount = parseInt(document.getElementById('fin-amount').value);
+  if(!amount || amount <= 0) return;
+  finEntries.push({ type, cat, amount });
+  document.getElementById('fin-amount').value = '';
+  finRender();
+}
+function finRender() {
+  const inc = finEntries.filter(e => e.type === 'income').reduce((s, e) => s + e.amount, 0);
+  const exp = finEntries.filter(e => e.type === 'expense').reduce((s, e) => s + e.amount, 0);
+  document.getElementById('fin-inc').textContent = fmtYen(inc);
+  document.getElementById('fin-exp').textContent = fmtYen(exp);
+  document.getElementById('fin-bal').textContent = fmtYen(inc - exp);
+  const catMap = {};
+  finEntries.filter(e => e.type === 'expense').forEach(e => { catMap[e.cat] = (catMap[e.cat] || 0) + e.amount; });
+  const labels = Object.keys(catMap);
+  const data = labels.map(l => catMap[l]);
+  const colors = labels.map(l => getFinColor(l));
+  if(finChart) { finChart.destroy(); finChart = null; }
+  if(labels.length) {
+    finChart = new Chart(document.getElementById('fin-chart'), {
+      type: 'doughnut',
+      data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 0 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${fmtYen(ctx.raw)}` } } } }
+    });
+  }
+  document.getElementById('fin-list').innerHTML = [...finEntries].reverse().slice(0, 8).map(e => {
+    const c = getFinColor(e.cat);
+    return `<div class="fin-item"><span style="color:${c}">${e.cat}</span><span style="font-family:var(--mono);color:${e.type==='income'?'#e05c3a':'#8b1a10'}">${e.type==='income'?'+':'-'}${fmtYen(e.amount)}</span></div>`;
+  }).join('');
+}
+const FIN_CATS = {
+  income:  ['給料','事業所得','副業','臨時収入','投資収益','その他'],
+  expense: ['食費','外食','交通費','娯楽','光熱費','通信費','医療費','日用品','衣服','その他']
+};
+function finUpdateCats() {
+  const type = document.getElementById('fin-type')?.value || 'income';
+  const sel  = document.getElementById('fin-cat');
+  if(!sel) return;
+  sel.innerHTML = FIN_CATS[type].map(c => `<option>${c}</option>`).join('');
+}
+
+// ═══ CHAT ═══
+const BOT_NAMES = ['田中さん','山田さん','佐藤さん','鈴木さん'];
+const BOT_MSGS = ['そうですね！','なるほど〜','それ気になりますね','たしかに！','いいですね','面白い！','どういう意味ですか？','了解です','わかります！','それ私も思ってた'];
+const CHAT_COLORS = ['#e05c3a','#c0392b','#8b1a10','#d4856a','#903020'];
+let chatState = { msgs: [], users: {}, botInterval: null, sinceSum: 0, summarizing: false };
+function chatUserColor(name) { let h = 0; for(let i = 0; i < name.length; i++) h = (h*31 + name.charCodeAt(i)) % CHAT_COLORS.length; return CHAT_COLORS[h]; }
+function getMyName() { return document.getElementById('chat-name')?.value?.trim() || 'ユーザー1'; }
+function initChat() {
+  chatState.users[getMyName()] = true;
+  renderChatOnline();
+}
+function renderChatOnline() {
+  const el = document.getElementById('chat-online');
+  if(!el) return;
+  el.innerHTML = Object.keys(chatState.users).map(n => `<div class="chat-chip" style="border-color:${chatUserColor(n)}44;color:${chatUserColor(n)}">${n}</div>`).join('');
+}
+function renderChatMsgs() {
+  const el = document.getElementById('chat-msgs');
+  if(!el) return;
+  if(!chatState.msgs.length) { el.innerHTML = '<div style="text-align:center;font-size:12px;color:var(--muted);padding:1rem 0">メッセージを送ってみましょう。5件ごとにAIが要約します。</div>'; return; }
+  el.innerHTML = chatState.msgs.map(m => {
+    if(m.type === 'summary') return `<div class="chat-bubble-wrap ai-sum"><div class="chat-meta">AI要約ボット</div><div class="chat-bubble">${m.summarizing ? '<span class="spin"></span> 要約中...' : m.text}</div></div>`;
+    const isMe = m.name === getMyName();
+    const c = chatUserColor(m.name);
+    return `<div class="chat-bubble-wrap ${isMe ? 'me' : 'other'}"><div class="chat-meta" style="color:${c}">${m.name}</div><div class="chat-bubble">${escH(m.text)}</div></div>`;
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+function escH(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function chatSend() {
+  const name = getMyName();
+  const inp = document.getElementById('chat-input');
+  const text = inp.value.trim(); if(!text) return;
+  chatState.users[name] = true;
+  chatState.msgs.push({ type: 'chat', name, text });
+  chatState.sinceSum++;
+  inp.value = ''; renderChatOnline(); renderChatMsgs();
+  if(chatState.sinceSum >= 5 && !chatState.summarizing) chatDoSum();
+}
+function chatAddBot() {
+  const available = BOT_NAMES.filter(n => !chatState.users[n]);
+  if(!available.length) return;
+  chatState.users[available[0]] = true;
+  renderChatOnline();
+  if(!chatState.botInterval) {
+    chatState.botInterval = setInterval(() => {
+      const active = BOT_NAMES.filter(n => chatState.users[n]);
+      if(active.length) {
+        const n = active[Math.floor(Math.random() * active.length)];
+        chatState.msgs.push({ type: 'chat', name: n, text: BOT_MSGS[Math.floor(Math.random() * BOT_MSGS.length)] });
+        chatState.sinceSum++;
+        renderChatMsgs();
+        if(chatState.sinceSum >= 5 && !chatState.summarizing) chatDoSum();
+      }
+    }, 3000);
+  }
+}
+function chatDoSum() {
+  chatState.summarizing = true; chatState.sinceSum = 0;
+  const recent = chatState.msgs.filter(m => m.type === 'chat').slice(-8);
+  const idx = chatState.msgs.length;
+  chatState.msgs.push({ type: 'summary', text: '', summarizing: true });
+  renderChatMsgs();
+  const lines = recent.map(m => `${m.name}: ${m.text}`);
+  const names = [...new Set(recent.map(m => m.name))].join('・');
+  const text = `【${names}】による${recent.length}件の会話 — ${lines[lines.length-1]?.text || ''}`;
+  chatState.msgs[idx] = { type: 'summary', text, summarizing: false };
+  chatState.summarizing = false; renderChatMsgs();
+}
+
+</script>
+</body>
+</html>

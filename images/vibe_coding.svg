@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2300" height="2300" viewBox="0 0 2300 2300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fdf8f6"/>
+      <stop offset="100%" style="stop-color:#f0ddd7"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a08"/>
+      <stop offset="50%" style="stop-color:#c0392b"/>
+      <stop offset="100%" style="stop-color:#e05c3a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2300" height="2300" fill="url(#bg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="1150" cy="1000" r="900" fill="rgba(224,92,58,0.05)"/>
+  <circle cx="1150" cy="1000" r="650" fill="rgba(224,92,58,0.05)"/>
+  <circle cx="200" cy="200" r="120" fill="rgba(224,92,58,0.07)"/>
+  <circle cx="2100" cy="2100" r="150" fill="rgba(139,26,16,0.07)"/>
+  <circle cx="2100" cy="200" r="80" fill="rgba(192,57,43,0.07)"/>
+  <circle cx="200" cy="2100" r="100" fill="rgba(224,92,58,0.07)"/>
+
+  <!-- Top label -->
+  <text x="1150" y="320" text-anchor="middle" font-family="monospace" font-size="56" fill="#a06050" letter-spacing="16">// VIBE CODING PORTFOLIO</text>
+
+  <!-- Main title -->
+  <text x="1150" y="580" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="240" fill="url(#titleGrad)">Vibe</text>
+  <text x="1150" y="810" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="240" fill="#1a0a08">Works</text>
+
+  <!-- Divider -->
+  <line x1="350" y1="890" x2="1950" y2="890" stroke="rgba(180,60,40,0.25)" stroke-width="3"/>
+
+  <!-- Japanese subtitle -->
+  <text x="1150" y="990" text-anchor="middle" font-family="sans-serif" font-size="72" fill="#a06050">バイブコーディング作品集</text>
+
+  <!-- App cards row -->
+  <!-- Card 1: 習慣トラッカー -->
+  <rect x="150" y="1080" width="360" height="420" rx="32" fill="white" fill-opacity="0.85" stroke="rgba(180,60,40,0.15)" stroke-width="2"/>
+  <text x="330" y="1200" text-anchor="middle" font-size="90">✅</text>
+  <text x="330" y="1300" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="46" fill="#1a0a08">習慣</text>
+  <text x="330" y="1360" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#a06050">トラッカー</text>
+  <rect x="180" y="1400" width="300" height="52" rx="10" fill="rgba(224,92,58,0.12)"/>
+  <text x="330" y="1435" text-anchor="middle" font-family="monospace" font-size="28" fill="#e05c3a" letter-spacing="4">EASY</text>
+
+  <!-- Card 2: ポモドーロ -->
+  <rect x="570" y="1080" width="360" height="420" rx="32" fill="white" fill-opacity="0.85" stroke="rgba(180,60,40,0.15)" stroke-width="2"/>
+  <text x="750" y="1200" text-anchor="middle" font-size="90">🍅</text>
+  <text x="750" y="1300" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="46" fill="#1a0a08">ポモドーロ</text>
+  <text x="750" y="1360" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#a06050">タイマー</text>
+  <rect x="600" y="1400" width="300" height="52" rx="10" fill="rgba(192,57,43,0.12)"/>
+  <text x="750" y="1435" text-anchor="middle" font-family="monospace" font-size="28" fill="#c0392b" letter-spacing="4">MED</text>
+
+  <!-- Card 3: カロリー管理 -->
+  <rect x="990" y="1080" width="360" height="420" rx="32" fill="white" fill-opacity="0.85" stroke="rgba(180,60,40,0.15)" stroke-width="2"/>
+  <text x="1170" y="1200" text-anchor="middle" font-size="90">🍱</text>
+  <text x="1170" y="1300" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="46" fill="#1a0a08">カロリー</text>
+  <text x="1170" y="1360" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#a06050">管理</text>
+  <rect x="1020" y="1400" width="300" height="52" rx="10" fill="rgba(192,57,43,0.12)"/>
+  <text x="1170" y="1435" text-anchor="middle" font-family="monospace" font-size="28" fill="#c0392b" letter-spacing="4">MED</text>
+
+  <!-- Card 4: AI家計管理 -->
+  <rect x="1410" y="1080" width="360" height="420" rx="32" fill="white" fill-opacity="0.85" stroke="rgba(180,60,40,0.15)" stroke-width="2"/>
+  <text x="1590" y="1200" text-anchor="middle" font-size="90">💰</text>
+  <text x="1590" y="1300" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="46" fill="#1a0a08">AI家計</text>
+  <text x="1590" y="1360" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#a06050">管理</text>
+  <rect x="1440" y="1400" width="300" height="52" rx="10" fill="rgba(139,26,16,0.12)"/>
+  <text x="1590" y="1435" text-anchor="middle" font-family="monospace" font-size="28" fill="#8b1a10" letter-spacing="4">HARD</text>
+
+  <!-- Card 5: チャット -->
+  <rect x="1830" y="1080" width="360" height="420" rx="32" fill="white" fill-opacity="0.85" stroke="rgba(180,60,40,0.15)" stroke-width="2"/>
+  <text x="2010" y="1200" text-anchor="middle" font-size="90">💬</text>
+  <text x="2010" y="1300" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="46" fill="#1a0a08">チャット</text>
+  <text x="2010" y="1360" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#a06050">リアルタイム</text>
+  <rect x="1860" y="1400" width="300" height="52" rx="10" fill="rgba(139,26,16,0.12)"/>
+  <text x="2010" y="1435" text-anchor="middle" font-family="monospace" font-size="28" fill="#8b1a10" letter-spacing="4">HARD</text>
+
+  <!-- Stats bar -->
+  <rect x="600" y="1600" width="1100" height="160" rx="24" fill="white" fill-opacity="0.65" stroke="rgba(180,60,40,0.12)" stroke-width="2"/>
+  <text x="800" y="1665" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="70" fill="#e05c3a">1</text>
+  <text x="800" y="1730" text-anchor="middle" font-family="sans-serif" font-size="34" fill="#a06050">かんたん</text>
+  <text x="1150" y="1665" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="70" fill="#c0392b">2</text>
+  <text x="1150" y="1730" text-anchor="middle" font-family="sans-serif" font-size="34" fill="#a06050">ふつう</text>
+  <text x="1500" y="1665" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="70" fill="#8b1a10">2</text>
+  <text x="1500" y="1730" text-anchor="middle" font-family="sans-serif" font-size="34" fill="#a06050">むずかしい</text>
+
+  <!-- Bottom label -->
+  <text x="1150" y="1920" text-anchor="middle" font-family="monospace" font-size="48" fill="#b07060" letter-spacing="4">Built with AI × Vibe Coding</text>
+
+  <!-- Corner dots decoration -->
+  <circle cx="500" cy="1850" r="10" fill="#e05c3a" opacity="0.35"/>
+  <circle cx="540" cy="1850" r="6" fill="#e05c3a" opacity="0.2"/>
+  <circle cx="1800" cy="1850" r="10" fill="#8b1a10" opacity="0.35"/>
+  <circle cx="1760" cy="1850" r="6" fill="#8b1a10" opacity="0.2"/>
+</svg>
