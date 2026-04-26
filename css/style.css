@@ -1,297 +1,211 @@
-﻿* {
+/* ========================================
+   CSS変数（カラーパレット・共通値）
+   ======================================== */
+:root {
+    --color-primary:  #5250e0;
+    --color-bg:       rgba(232, 238, 241, 0.9);
+    --color-surface:  #fff;
+    --color-text:     #333;
+    --color-border:   #ccc;
+    --color-hover:    #cdcdcd;
+    --font-main:      'Noto Serif JP', serif;
+    --radius-img:     16px;
+    --radius-btn:     30px;
+}
+
+/* ========================================
+   リセット・基本
+   ======================================== */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: Note serif JP,serif;
+    font-family: var(--font-main);
     text-align: center;
-    margin: 0 auto;
-    background-color: rgba(232, 238, 241, 0.9);
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
-h1 {
-    text-align: center;
-    justify-content: center;
-    margin: 0 auto;
- 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
 }
 
 img {
-    border-radius: 30px;
+    border-radius: var(--radius-img);
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
-.tews {
-   margin: 0 auto;
-   margin-bottom: 30px;
-   }
-
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
 
 section {
     margin-bottom: 30px;
 }
 
-  
+/* ========================================
+   共通セクションボックス
+   ======================================== */
+.section-box {
+    padding: 32px 16px;
+    background-color: var(--color-surface);
+}
+
+.section-box p {
+    line-height: 1.9;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* ========================================
+   ヘッダー
+   ======================================== */
 .header {
-    background-color:  #fff;
-color: black;
-margin-bottom: 30px;
-display: flex;
-height: fit-content;
-z-index: 1000;
-align-items: center;
-
-  }
-
-  /* 初期化 */
-  
-  
-  a {
-      text-decoration: none;
-  }
-  
-  li {
-      list-style: none;
-  }
-  
-
-
-  
-  .header-inner {
-      padding: 0 5%;
-  }
-  
-
-.fo01 li {
-font-size: 1rem;
-padding: 10px;
-}
-
-
-.fo01 li a {
-    background-color: #fff;
-color: black;
-    text-decoration: none;
-    
-    padding: 5px;
-  }
-
-.fo01 a:hover {
-    background-color: #CDCDCD;
-  }
-
-
-.fo01 {
-    background-color: #fff;
-color: black;
-padding: 10px;
-justify-content: center;
-margin: 0 auto;
-}
-
-.box2 {
-  padding: 10px;
-  padding-top: 10px;
-    background-color: #fff;
-color: black;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-variant-numeric: 1rem;
-}
-
-
-.box3 {
-padding: 10px;
-padding-top: 10px;
-background-color: #fff;
-color: black;
-}
-
-.box1 {
-    padding: 10px;
-padding-top: 10px;
-background-color: #fff;
-color: black;
-}
-  
-
-.boss {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    margin: 30px ;
-}
-
-
-/* =============================
-   RiMa Cafe (.boss1) 横並び修正
-   ============================= */
-.boss1 {
-    display: flex;           /* 横並びに */
-    justify-content: center; 
-    padding-top: 20px;
-    margin: 30px;
-}
-
-/* .boss1 内のリンクテキスト部分 */
-.box_a {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    margin-bottom: 30px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    height: fit-content;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.box_a li {
-    list-style: none;
+h1 {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    padding: 12px 16px;
 }
 
-.box_a li {
-    list-style: none;
+.header-inner {
+    padding: 0 5%;
 }
 
-
-.boss2 {
-display: flex;
-justify-content: center;
-margin: 30px;
+/* ========================================
+   プロフィール写真
+   ======================================== */
+.tews {
+    margin: 0 auto 30px;
 }
 
-.boss3{
+.tews img {
+    width: 420px;
+    max-width: 85vw;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* ========================================
+   Works セクション
+   ======================================== */
+.works-list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-top: 24px;
+}
+
+/* 1作品 = 横並び（テキスト左・画像右） */
+.work-item {
     display: flex;
     justify-content: center;
-    margin: 30px;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
 }
 
-.boss4 {
-    display: flex;
-    justify-content: center;
-    margin: 30px;
+/* リンクテキスト側 */
+.work-link-box {
+    min-width: 160px;
 }
 
-
-.boss5 {
-    display: flex;
-    justify-content: center;
-    margin: 30px;
+.work-link-box a {
+    display: inline-block;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    transition: background-color 0.25s;
 }
 
-
-.boss6 {
-    display: flex;
-    justify-content: center;
-    margin: 30px;
+.work-link-box a:hover {
+    background-color: var(--color-hover);
 }
 
-.boss7 {
-    display: flex;
-    justify-content: center;
-    margin: 30px;
+/* 画像側 */
+.work-img-box img,
+.work-img-box picture img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--radius-img);
 }
 
-.boss8 {
-    display: flex;
-    justify-content: center;
-    margin: 30px;
+/* ========================================
+   Contact
+   ======================================== */
+.mail button {
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: var(--font-main);
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    transition: opacity 0.25s;
 }
 
-.boss9 {
-    display: flex;
-    justify-content: center;
-    margin: 30px;
+.mail button:hover {
+    opacity: 0.8;
 }
 
-.boss_1 {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    margin: 30px;
-}
-
-.boss10 {
-    display: flex;
-    justify-content: center;
-    margin: 30px;
-}
-
-
-
-input[type="email"]{
-    padding: 10px;
-    width: 65%;
-    color:#999;
-    border:1px solid #999;
-    }
-
-    .mail button{
-    background: #5250e0;
-    color: white;
-    font-size:16px;
-    font-weight:bold;
-    padding: 10px 10px;
-    margin: 0 5px;
-    border-radius: 30px;
-    }
-
-.mail {
-    padding: 10px;
-    padding-top: 10px;
-    background-color: #fff;
-    color: black;
-}
-
-  /* ------------------------- */
-  #header-hamburger {
-    /* 見た目のCSS */
-    background: #fff;
+/* ========================================
+   ハンバーガーメニュー
+   ======================================== */
+#header-hamburger {
+    background: var(--color-surface);
     cursor: pointer;
     width: 50px;
     aspect-ratio: 1/1;
     margin-left: auto;
-    /* ボタンがハンバーガーウィンドウの下に隠れないようにする指定 */
     position: relative;
     z-index: 10;
 }
 
-
 #header-hamburger span {
-    /* 見た目のCSS */
     display: inline-block;
-    background: #333;
+    background: var(--color-text);
     width: 50%;
     height: 2px;
-    /* バーガー線の太さ */
-    /*アニメーションの設定*/
-    transition: all .4s;
+    transition: all 0.4s;
     position: absolute;
     left: 50%;
-    /* バーガー線の位置 */
     transform: translateX(-50%);
 }
 
-/* １本目 */
-#header-hamburger span:nth-of-type(1) {
-    top: 30%;
-}
+#header-hamburger span:nth-of-type(1) { top: 30%; }
+#header-hamburger span:nth-of-type(2) { top: 50%; }
+#header-hamburger span:nth-of-type(3) { top: 70%; }
 
-/* ２本目 */
-#header-hamburger span:nth-of-type(2) {
-    top: 50%;
-}
-
-/* ３本目 */
-#header-hamburger span:nth-of-type(3) {
-    top: 70%;
-}
-
-
-/* ------------------ */
-/* ×印 */
-/* ------------------ */
-/*activeクラスが付与されると線が回転して×になる*/
+/* × 印（active時） */
 #header-hamburger.active span:nth-of-type(1) {
     top: 50%;
     left: 25%;
@@ -310,29 +224,23 @@ input[type="email"]{
     width: 50%;
 }
 
-/* ----------------------------------------------- */
 /* メニューウィンドウ */
-/* -------------------------- */
 #hamburger-window {
     transition: 0.3s;
     text-align: center;
-    /* 初期状態は非表示 */
     visibility: hidden;
     position: fixed;
     top: 50px;
     right: -100vw;
-    z-index: 1;
-    /* 画面いっぱいに表示されるサイズに設定 */
+    z-index: 999;
     height: calc(100vh - 50px);
-    /* 画面からはみ出したらスクロール可能にする */
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-/*スクロールバー非表示（Chrome・Safari）*/
-.content::-webkit-scrollbar{
-    display:none;
+#hamburger-window::-webkit-scrollbar {
+    display: none;
 }
 
 #hamburger-window.open {
@@ -348,378 +256,45 @@ input[type="email"]{
 }
 
 .hamburger-window__link:hover {
-    background-color:  #CDCDCD;
+    background-color: var(--color-hover);
 }
 
 .hamburger-window__link:first-child .menu-link {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--color-border);
 }
 
 .menu-link {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--color-border);
     padding: 23px 0 23px 5%;
-    color: #333;
-    background-color: rgba(232, 238, 241, 0.9);
-}    
-
-.hamburger-window__link::after {
-    /* fontawesomeアイコンを表示 */
-    font-weight: 900;
-    font-family: "Font Awesome 6 Free";
-    display: inline-block;
-    position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    aspect-ratio: 1/1;
-    color: #333;
+    color: var(--color-text);
+    background-color: var(--color-bg);
 }
 
-.hamburger-window__title {
-    color: #333;
-}    
-
-
-
-
-.boxvibe li {
-    list-style: none;
-}
-
-@media (min-width:700px) {
-
-    header {
-        margin-bottom: 30px;
-    }
-
+/* ========================================
+   レスポンシブ
+   ======================================== */
+@media (min-width: 700px) {
     h1 {
         padding-left: 210px;
     }
-    
-
-
-    .tews img {
-        width: 420px;
-        height: auto;
-    }
-
-    .boxa li {
-        margin: 135px;
-        list-style: none;
-    }
-
-    .box_z li {
-        margin: 135px;
-        list-style: none;
-    }
-
-    /* =============================
-       RiMa Cafe PC版 横並び間隔調整
-       ============================= */
-    .box_a li {
-        margin: 135px;   /* .boxa li と同じ間隔 */
-        list-style: none;
-    }
-
-    /* RiMa Cafe の画像サイズ・中央揃え（他と統一） */
-  
-
-    .boss1 .boxa1 picture {
-        display: block;
-        line-height: 0; /* 余白除去 */
-    }
-
-    .boss1 .boxa1 picture img {
-        width: 300px;
-        height: 300px;
-        display: block;
-    }
-
-    .boxb li {
-        margin: 80px;
-        list-style: none;
-    }
-
-    .boxc li {
-        margin: 100px;
-        list-style: none;
-    }
-
-    .boxd li {
-        margin: 135px;
-        list-style: none;
-    }
-
-    .boxe li {
-        margin: 110px;
-        list-style: none;
-    }
-
-    .boxhg li {
-        margin: 130px;
-        list-style: none;
-    }
-
-.boxgs li {
-    margin: 130px;
-    list-style: none;
 }
 
-.boxiq li {
-    margin: 130px;
-    list-style: none;
-}
-
-
-.boxfe li {
-    margin: 130px;
-    list-style: none;
-}
-
-
-
-
-    .boss1 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .boxa1 img {
-        width: 300px;
-        height: 300px;
-    }
-
-    .boxb2 img {
-        width: 300px;
-        height: 350px;
-    }
-
-    .boxc3 img {
-        width: 300px;
-        height: 300px;
-    }
-
-    .boxd4 img {
-        width: 300px;
-        height: 350px;
-    }
-
-    .boxe5 img {
-        width: 300px;
-        height: 350px;
-    } 
-    
-    .boxj3 img {
-        width: 300px;
-        height: 300px;
-    }
-
-    .boxz4 img {
-        width: 300px;
-        height: 300px;
-    }
-
-    .boxls img {
-        width: 300px;
-        height: 300px;
-    }
-
-    .boxcap img {
-        width: 300px;
-        height: 350px;
-    }
-
-    .boxvibe li {
-        margin: 135px;
-        list-style: none;
-    }
-
-    .boxvibe2 img {
-        width: 300px;
-        height: 300px;
-    }
-
-    .boxc2 img {
-        width: 300px;
-        height: 225px;
-    }
-
-
-}
-
-@media (max-width:700px) {
-
+@media (max-width: 699px) {
     header {
         margin-bottom: 40px;
     }
 
-   
-    .tews img {
-        width: 85vw;
-        max-width: 350px;
-        height: auto;
-    }
-
-    .boxa li {
-        list-style: none;
-    }
-
-    .boxb li {
-        list-style: none;
-    }
-
-    .boxc li {
-        list-style: none;
-    }
-
-    .boss1 {
-        display: flex;
+    /* Works: スマホでは縦積み */
+    .work-item {
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin: 30px 0;
+        gap: 16px;
     }
 
-    .boxa1 img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .boss1 .boxa1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-
-    .boss1 picture {
-        display: block;
-        width: 100%;
-        text-align: center;
-    }
-
-    .boss1 .boxa1 img,
-    .boss1 picture img {
-        width: 90vw;
-        max-width: 300px;
+    .work-img-box img,
+    .work-img-box picture img {
+        width: min(80vw, 280px);
         height: auto;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .boxb2 img {
-        width: 60vw;
-        max-width: 280px;
-        height: auto;
-    }
-
-    .boxc3 img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .boxd4 img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .boxe5 img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .boxj3 img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .boxz4 img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .boxcap img{
-
-        width: 200px;
-        height: 200px;
-    }
-
-    .boxc2 img {
-        width: 200px;
-        height: 150px;
-    }
-
-    .futsal img {
-        width: 200px;
-        height: 200px;   
-    }
-
-
-    .boss {
-        margin: 30px 0;
-        display: block;
-    }
-
-    .boss_1 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin: 30px 0;
-    }
-
-    .boss2 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boss3 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boss4 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boss5 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boss6 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boss7 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boss8 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boss9 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boss10 {
-        margin: 30px;
-        display: block;
-    }
-
-    .boxvibe2 img {
-        width: 200px;
-        height: 200px;
     }
 }
