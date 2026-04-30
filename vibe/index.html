@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -419,17 +419,6 @@ footer span { color: var(--accent-easy); }
       <button class="card-open-btn" onclick="event.stopPropagation();openApp('chat')">開いて試す →</button>
     </div>
 
-    <div class="app-card easy" onclick="openApp('gallery')">
-      <div class="card-header">
-        <div class="card-icon">📷</div>
-        <div class="card-meta">
-          <div class="card-title">高尾一輝 フォトギャラリー</div>
-          <div class="card-desc">日常・サッカー・ギター・フェレットなど、高尾一輝の写真をまとめたギャラリー。</div>
-        </div>
-        <div class="card-badge easy">EASY</div>
-      </div>
-      <button class="card-open-btn" onclick="event.stopPropagation();openApp('gallery')">ギャラリーを開く →</button>
-    </div>
   </div>
 </div>
 
@@ -576,32 +565,6 @@ footer span { color: var(--accent-easy); }
 </div>
 </div>
 
-<!-- GALLERY MODAL -->
-<div class="modal-overlay" id="modal-gallery">
-<div class="modal" style="max-width:960px">
-  <div class="modal-header">
-    <span class="icon">📷</span><h2>高尾一輝 フォトギャラリー</h2>
-    <div class="card-badge easy" style="margin-right:8px">EASY</div>
-    <button class="modal-close" onclick="closeModal('gallery')">✕</button>
-  </div>
-  <div class="modal-body" style="padding:1rem">
-    <!-- タグフィルター -->
-    <div id="gallery-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem"></div>
-    <!-- グリッド -->
-    <div id="gallery-grid" style="columns:2;column-gap:8px;"></div>
-  </div>
-</div>
-</div>
-
-<!-- LIGHTBOX -->
-<div id="gallery-lightbox" style="display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,0.95);backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:column;" onclick="closeLightbox()">
-  <button onclick="closeLightbox()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#aaa;font-size:22px;cursor:pointer">✕</button>
-  <button id="lb-prev" onclick="event.stopPropagation();lbMove(-1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#888;font-size:48px;cursor:pointer;padding:8px 16px">‹</button>
-  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()" style="max-width:88vw;max-height:80vh;object-fit:contain;border-radius:4px;box-shadow:0 0 80px rgba(0,0,0,0.8)">
-  <p id="lb-caption" style="color:#888;font-size:11px;margin-top:12px;letter-spacing:0.15em"></p>
-  <button id="lb-next" onclick="event.stopPropagation();lbMove(1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#888;font-size:48px;cursor:pointer;padding:8px 16px">›</button>
-</div>
-
 <!-- CHAT MODAL -->
 <div class="modal-overlay" id="modal-chat">
 <div class="modal">
@@ -648,7 +611,6 @@ function openApp(id) {
   if(id === 'pomo') updatePomoDisplay();
   if(id === 'chat') initChat();
   if(id === 'finance') finUpdateCats();
-  if(id === 'gallery') renderGallery();
 }
 function closeModal(id) {
   document.getElementById('modal-' + id).classList.remove('open');
@@ -930,111 +892,8 @@ function chatDoSum() {
   chatState.summarizing = false; renderChatMsgs();
 }
 
-// ═══ GALLERY ═══
-const GALLERY_BASE = '../My_photo_gallery/gallery/';
-const GALLERY_PHOTOS = [
-  { file:'DSCF3436.jpeg', tag:'フェレット' },
-  { file:'DSCF3440.jpeg', tag:'フェレット' },
-  { file:'DSCF3441.jpeg', tag:'フェレット' },
-  { file:'DSCF3443.jpeg', tag:'フェレット' },
-  { file:'DSCF3445.jpeg', tag:'フェレット' },
-  { file:'DSCF3449.jpeg', tag:'フェレット' },
-  { file:'DSCF3454.jpeg', tag:'フェレット' },
-  { file:'DSCF3462.jpeg', tag:'日常' },
-  { file:'DSCF3465.jpeg', tag:'日常' },
-  { file:'DSCF3469.jpeg', tag:'日常' },
-  { file:'DSCF3471.jpeg', tag:'日常' },
-  { file:'DSCF3472.jpeg', tag:'日常' },
-  { file:'DSCF3474.jpeg', tag:'日常' },
-  { file:'DSCF3478.jpeg', tag:'日常' },
-  { file:'DSCF3481.jpeg', tag:'日常' },
-  { file:'DSCF3483.jpeg', tag:'日常' },
-  { file:'DSCF3485.jpeg', tag:'日常' },
-  { file:'DSCF3486.jpeg', tag:'日常' },
-  { file:'DSCF3489.jpeg', tag:'日常' },
-  { file:'DSCF3496.jpeg', tag:'日常' },
-  { file:'DSCF3504.jpeg', tag:'日常' },
-  { file:'DSCF3508.jpeg', tag:'日常' },
-  { file:'DSCF3510.jpeg', tag:'日常' },
-  { file:'DSCF3511.jpeg', tag:'日常' },
-  { file:'DSCF3521.jpeg', tag:'日常' },
-  { file:'DSCF3551.jpeg', tag:'日常' },
-  { file:'DSCF3554.jpeg', tag:'日常' },
-  { file:'DSCF3569.jpeg', tag:'日常' },
-  { file:'DSCF3583.jpeg', tag:'日常' },
-  { file:'DSCF3585.jpeg', tag:'日常' },
-  { file:'DSCF3586.jpeg', tag:'日常' },
-  { file:'DSCF3595.jpeg', tag:'サッカー' },
-  { file:'DSCF3597.jpeg', tag:'サッカー' },
-  { file:'DSCF3599.jpeg', tag:'サッカー' },
-  { file:'DSCF3601.jpeg', tag:'サッカー' },
-  { file:'DSCF3606.jpeg', tag:'サッカー' },
-  { file:'DSCF3609.jpeg', tag:'サッカー' },
-  { file:'DSCF3613.jpeg', tag:'サッカー' },
-  { file:'DSCF3614.jpeg', tag:'サッカー' },
-  { file:'DSCF3616.jpeg', tag:'サッカー' },
-  { file:'DSCF3681.jpeg', tag:'ギター' },
-  { file:'DSCF3682.jpeg', tag:'ギター' },
-  { file:'DSCF3685.jpeg', tag:'ギター' },
-  { file:'DSCF3687.jpeg', tag:'ギター' },
-  { file:'DSCF3691.jpeg', tag:'ギター' },
-  { file:'DSCF3695.jpeg', tag:'ギター' },
-  { file:'DSCF3700.jpeg', tag:'ギター' },
-  { file:'DSCF3731.jpeg', tag:'日常' },
-  { file:'DSCF3732.jpeg', tag:'日常' },
-  { file:'DSCF3734.jpeg', tag:'日常' },
-  { file:'DSCF3735.jpeg', tag:'日常' },
-  { file:'DSCF3737.jpeg', tag:'日常' },
-];
-let galleryTag = 'すべて';
-let lbIndex = 0;
-let lbFiltered = [];
-
-function renderGallery() {
-  const tags = ['すべて', ...new Set(GALLERY_PHOTOS.map(p => p.tag))];
-  document.getElementById('gallery-tags').innerHTML = tags.map(t =>
-    `<button onclick="setGalleryTag('${t}')" id="gtag-${t}" style="padding:4px 14px;border-radius:20px;font-size:11px;letter-spacing:0.12em;border:1px solid ${t===galleryTag?'#888':'var(--border)'};background:${t===galleryTag?'var(--text)':'transparent'};color:${t===galleryTag?'var(--bg)':'var(--muted)'};cursor:pointer;transition:all 0.2s;font-family:var(--mono)">${t}</button>`
-  ).join('');
-  renderGalleryGrid();
-}
-function setGalleryTag(tag) {
-  galleryTag = tag;
-  renderGallery();
-}
-function renderGalleryGrid() {
-  lbFiltered = galleryTag === 'すべて' ? GALLERY_PHOTOS : GALLERY_PHOTOS.filter(p => p.tag === galleryTag);
-  document.getElementById('gallery-grid').innerHTML = lbFiltered.map((p, i) =>
-    `<div style="break-inside:avoid;margin-bottom:8px;cursor:pointer;overflow:hidden;border-radius:6px" onclick="openLightbox(${i})">
-      <img src="${GALLERY_BASE}${p.file}" alt="${p.file}" loading="lazy"
-        style="width:100%;display:block;transition:transform 0.4s,filter 0.4s;filter:grayscale(40%) brightness(0.9)"
-        onmouseover="this.style.filter='grayscale(0%) brightness(1.05)';this.style.transform='scale(1.03)'"
-        onmouseout="this.style.filter='grayscale(40%) brightness(0.9)';this.style.transform='scale(1)'">
-    </div>`
-  ).join('');
-}
-function openLightbox(i) {
-  lbIndex = i;
-  const lb = document.getElementById('gallery-lightbox');
-  lb.style.display = 'flex';
-  document.getElementById('lb-img').src = GALLERY_BASE + lbFiltered[i].file;
-  document.getElementById('lb-caption').textContent = (i+1) + ' / ' + lbFiltered.length + '　' + lbFiltered[i].tag;
-}
-function closeLightbox() {
-  document.getElementById('gallery-lightbox').style.display = 'none';
-}
-function lbMove(dir) {
-  lbIndex = (lbIndex + dir + lbFiltered.length) % lbFiltered.length;
-  openLightbox(lbIndex);
-}
-document.addEventListener('keydown', e => {
-  const lb = document.getElementById('gallery-lightbox');
-  if(lb.style.display === 'flex') {
-    if(e.key === 'ArrowLeft') lbMove(-1);
-    if(e.key === 'ArrowRight') lbMove(1);
-    if(e.key === 'Escape') closeLightbox();
-  }
-});
 
 </script>
 </body>
 </html>
+
