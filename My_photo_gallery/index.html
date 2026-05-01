@@ -1,15 +1,303 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My_photo_gallery</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" crossorigin src="./assets/index-DVDzFMqE.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DE7hYow_.css">
-  </head>
-  <body>
-    <div id="root"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高尾一輝 — Photo Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #f7f6f3;
+      color: #1a1a1a;
+      font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+      min-height: 100vh;
+    }
 
-  </body>
+    /* Header */
+    header {
+      padding: 52px 24px 36px;
+      text-align: center;
+      border-bottom: 1px solid #e5e3df;
+    }
+    header h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.1;
+    }
+    header p {
+      font-size: 12px;
+      color: #888;
+      margin-top: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #555; }
+
+    /* Tag filter */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      padding: 24px 16px;
+      border-bottom: 1px solid #e5e3df;
+    }
+    .tag-btn {
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      border: 1px solid #d5d3cf;
+      background: transparent;
+      color: #999;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: inherit;
+    }
+    .tag-btn.active {
+      border-color: #888;
+      background: #1a1a1a;
+      color: #f7f6f3;
+    }
+
+    /* Grid */
+    main { padding: 16px 12px 80px; }
+    .masonry { columns: 2; column-gap: 8px; }
+    @media (min-width: 640px) { .masonry { columns: 3; } }
+    @media (min-width: 1024px) { .masonry { columns: 4; } }
+
+    .photo-item {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-item img {
+      width: 100%;
+      display: block;
+      filter: grayscale(55%) brightness(0.88);
+      transform: scale(1);
+      transition: filter 0.5s ease, transform 0.5s ease;
+    }
+    .photo-item:hover img {
+      filter: grayscale(0%) brightness(1.04);
+      transform: scale(1.03);
+    }
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px 12px;
+    }
+    .photo-item:hover .photo-overlay { opacity: 1; }
+    .photo-label {
+      color: #e8e0d0;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.96);
+      backdrop-filter: blur(6px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 88vw;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 2px;
+      box-shadow: 0 0 80px rgba(0,0,0,0.8);
+    }
+    #lb-caption {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #555;
+      letter-spacing: 0.2em;
+    }
+    .lb-close {
+      position: absolute; top: 18px; right: 20px;
+      background: none; border: none; color: #aaa;
+      font-size: 22px; cursor: pointer; padding: 6px 10px;
+    }
+    .lb-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: #666;
+      font-size: 52px; cursor: pointer; padding: 8px 16px;
+      transition: color 0.2s;
+    }
+    .lb-arrow:hover { color: #ccc; }
+    #lb-prev { left: 4px; }
+    #lb-next { right: 4px; }
+
+    .empty {
+      text-align: center;
+      color: #ccc;
+      margin-top: 60px;
+      letter-spacing: 0.2em;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>高尾一輝</h1>
+  <p>Photo Gallery</p>
+  <a class="back-link" href="/">← Portfolio</a>
+</header>
+
+<div class="tags" id="tags"></div>
+
+<main>
+  <div class="masonry" id="grid"></div>
+  <p class="empty" id="empty" style="display:none">— no photos —</p>
+</main>
+
+<div id="lightbox">
+  <button class="lb-close" id="lb-close">✕</button>
+  <button class="lb-arrow" id="lb-prev">‹</button>
+  <img id="lb-img" src="" alt="">
+  <p id="lb-caption"></p>
+  <button class="lb-arrow" id="lb-next">›</button>
+</div>
+
+<script>
+const PHOTOS = [
+  { file:'DSCF3436.jpeg', tag:'フェレット' },
+  { file:'DSCF3440.jpeg', tag:'フェレット' },
+  { file:'DSCF3441.jpeg', tag:'フェレット' },
+  { file:'DSCF3443.jpeg', tag:'フェレット' },
+  { file:'DSCF3445.jpeg', tag:'フェレット' },
+  { file:'DSCF3449.jpeg', tag:'フェレット' },
+  { file:'DSCF3454.jpeg', tag:'フェレット' },
+  { file:'DSCF3462.jpeg', tag:'日常' },
+  { file:'DSCF3465.jpeg', tag:'日常' },
+  { file:'DSCF3469.jpeg', tag:'日常' },
+  { file:'DSCF3471.jpeg', tag:'日常' },
+  { file:'DSCF3472.jpeg', tag:'日常' },
+  { file:'DSCF3474.jpeg', tag:'日常' },
+  { file:'DSCF3478.jpeg', tag:'日常' },
+  { file:'DSCF3481.jpeg', tag:'日常' },
+  { file:'DSCF3483.jpeg', tag:'日常' },
+  { file:'DSCF3485.jpeg', tag:'日常' },
+  { file:'DSCF3486.jpeg', tag:'日常' },
+  { file:'DSCF3489.jpeg', tag:'日常' },
+  { file:'DSCF3496.jpeg', tag:'日常' },
+  { file:'DSCF3504.jpeg', tag:'日常' },
+  { file:'DSCF3508.jpeg', tag:'日常' },
+  { file:'DSCF3510.jpeg', tag:'日常' },
+  { file:'DSCF3511.jpeg', tag:'日常' },
+  { file:'DSCF3521.jpeg', tag:'日常' },
+  { file:'DSCF3551.jpeg', tag:'日常' },
+  { file:'DSCF3554.jpeg', tag:'日常' },
+  { file:'DSCF3569.jpeg', tag:'日常' },
+  { file:'DSCF3583.jpeg', tag:'日常' },
+  { file:'DSCF3585.jpeg', tag:'日常' },
+  { file:'DSCF3586.jpeg', tag:'日常' },
+  { file:'DSCF3595.jpeg', tag:'サッカー' },
+  { file:'DSCF3597.jpeg', tag:'サッカー' },
+  { file:'DSCF3599.jpeg', tag:'サッカー' },
+  { file:'DSCF3601.jpeg', tag:'サッカー' },
+  { file:'DSCF3606.jpeg', tag:'サッカー' },
+  { file:'DSCF3609.jpeg', tag:'サッカー' },
+  { file:'DSCF3613.jpeg', tag:'サッカー' },
+  { file:'DSCF3614.jpeg', tag:'サッカー' },
+  { file:'DSCF3616.jpeg', tag:'サッカー' },
+  { file:'DSCF3681.jpeg', tag:'ギター' },
+  { file:'DSCF3682.jpeg', tag:'ギター' },
+  { file:'DSCF3685.jpeg', tag:'ギター' },
+  { file:'DSCF3687.jpeg', tag:'ギター' },
+  { file:'DSCF3691.jpeg', tag:'ギター' },
+  { file:'DSCF3695.jpeg', tag:'ギター' },
+  { file:'DSCF3700.jpeg', tag:'ギター' },
+  { file:'DSCF3731.jpeg', tag:'日常' },
+  { file:'DSCF3732.jpeg', tag:'日常' },
+  { file:'DSCF3734.jpeg', tag:'日常' },
+  { file:'DSCF3735.jpeg', tag:'日常' },
+  { file:'DSCF3737.jpeg', tag:'日常' },
+];
+
+const TAGS = ['すべて', ...new Set(PHOTOS.map(p => p.tag))];
+let activeTag = 'すべて';
+let filtered = [];
+let lbIndex = 0;
+
+function renderTags() {
+  document.getElementById('tags').innerHTML = TAGS.map(t =>
+    `<button class="tag-btn ${t===activeTag?'active':''}" onclick="setTag('${t}')">${t}</button>`
+  ).join('');
+}
+function setTag(t) { activeTag = t; renderTags(); renderGrid(); }
+
+function renderGrid() {
+  filtered = activeTag === 'すべて' ? PHOTOS : PHOTOS.filter(p => p.tag === activeTag);
+  document.getElementById('empty').style.display = filtered.length ? 'none' : 'block';
+  document.getElementById('grid').innerHTML = filtered.map((p, i) => `
+    <div class="photo-item" onclick="openLb(${i})">
+      <img src="gallery/${p.file}" alt="${p.tag}" loading="lazy">
+      <div class="photo-overlay"><span class="photo-label">${p.tag}</span></div>
+    </div>
+  `).join('');
+}
+
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCap = document.getElementById('lb-caption');
+
+function openLb(i) {
+  lbIndex = i;
+  lbImg.src = 'gallery/' + filtered[i].file;
+  lbCap.textContent = (i+1) + ' / ' + filtered.length + '　' + filtered[i].tag;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function move(dir) {
+  lbIndex = (lbIndex + dir + filtered.length) % filtered.length;
+  openLb(lbIndex);
+}
+
+document.getElementById('lb-close').onclick = closeLb;
+document.getElementById('lb-prev').onclick = () => move(-1);
+document.getElementById('lb-next').onclick = () => move(1);
+lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if(!lb.classList.contains('open')) return;
+  if(e.key === 'ArrowLeft') move(-1);
+  if(e.key === 'ArrowRight') move(1);
+  if(e.key === 'Escape') closeLb();
+});
+
+renderTags();
+renderGrid();
+</script>
+</body>
 </html>
