@@ -295,6 +295,6 @@ h1 {
     .work-img-box img,
     .work-img-box picture img {
         width: min(80vw, 280px);
-        height: auto;
+        height: min(80vw, 280px);
     }
 }
