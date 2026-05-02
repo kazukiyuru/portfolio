@@ -161,6 +161,49 @@
       letter-spacing: 0.2em;
       font-size: 12px;
     }
+
+    /* Photographer */
+    .photographer {
+      border-top: 1px solid #e5e3df;
+      padding: 52px 24px 56px;
+      text-align: center;
+    }
+    .photographer-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: #bbb;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .photographer-name {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .photographer-title {
+      font-size: 12px;
+      color: #888;
+      letter-spacing: 0.2em;
+      margin-bottom: 28px;
+    }
+    .photographer-bio {
+      font-size: 14px;
+      line-height: 2;
+      color: #444;
+      max-width: 480px;
+      margin: 0 auto 28px;
+      letter-spacing: 0.05em;
+    }
+    .photographer-badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: #888;
+      border: 1px solid #d5d3cf;
+      padding: 6px 20px;
+      border-radius: 20px;
+    }
   </style>
 </head>
 <body>
@@ -177,6 +220,14 @@
   <div class="masonry" id="grid"></div>
   <p class="empty" id="empty" style="display:none">— no photos —</p>
 </main>
+
+<section class="photographer">
+  <p class="photographer-label">Photographer</p>
+  <h2 class="photographer-name">笹川 澪海</h2>
+  <p class="photographer-title">フォトグラファー</p>
+  <p class="photographer-bio">人とのつながりを大切にしていて、その人の会話の中から自然な表情を引き出すことが出来る。</p>
+  <span class="photographer-badge">現在被写体を募集中</span>
+</section>
 
 <div id="lightbox">
   <button class="lb-close" id="lb-close">✕</button>
