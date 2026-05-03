@@ -71,22 +71,11 @@
 
   slide.getPageElements().forEach(el => el.remove());
 
-  // タイトルを挿入
-  const titleBox = slide.insertTextBox("自分の酒飲みランキング");
-  titleBox.setLeft(50).setTop(20).setWidth(600).setHeight(50);
-  titleBox.getText().getTextStyle().setFontSize(24).setBold(true);
-
-  // コメントを挿入
-  const commentBox = slide.insertTextBox(comment);
-  commentBox.setLeft(50).setTop(80).setWidth(620).setHeight(40);
-  commentBox.getText().getTextStyle().setFontSize(14);
-
   // グラフを画像として挿入
   const image = slide.insertSheetsChartAsImage(chart);
-  image.scaleHeight(0.5)
-       .scaleWidth(0.5)
-       .alignOnPage(SlidesApp.AlignmentPosition.HORIZONTAL_CENTER)
-       .setTop(130);
+  image.scaleHeight(1.0)
+       .scaleWidth(1.0)
+       .alignOnPage(SlidesApp.AlignmentPosition.CENTER);
 }
 
 createSlide();</code></pre>
