@@ -47,39 +47,6 @@
       </div>
     </section>
 
-    <section class="card">
-      <h2>GAS コード</h2>
-      <pre><code>function createSlide() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName("ピボット テーブル  1");
-  const rows = sheet.getRange(1,1,6,2).getValues();
-
-  const most   = rows[2][0];
-  const second = rows[3][0];
-  const out    = rows[1][0];
-  const high   = rows[4][0];
-
-  const comment =
-    `最も飲んだのは${most}。2番目に${second}。${out},${high}は外呑み。`;
-
-  const chart = sheet.getCharts()[0];
-
-  // 既存のスライドを開いてリセット
-  const presentation =
-    SlidesApp.openById("18zz433ar1Rd8jYU95V1bselFfLkftz-02YFa6xroEh0");
-  const slide = presentation.getSlides()[0];
-
-  slide.getPageElements().forEach(el => el.remove());
-
-  // グラフを画像として挿入
-  const image = slide.insertSheetsChartAsImage(chart);
-  image.scaleHeight(1.0)
-       .scaleWidth(1.0)
-       .alignOnPage(SlidesApp.AlignmentPosition.CENTER);
-}
-
-createSlide();</code></pre>
-    </section>
 
   </main>
 
