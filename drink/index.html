@@ -41,7 +41,7 @@
         <a href="https://docs.google.com/spreadsheets/d/1LnLlG2_uDod8zRg6amGdGXbJp_BaY-KJRKvGZVg8rY0" target="_blank" class="link-btn">
           📊 スプレッドシート
         </a>
-        <a href="https://docs.google.com/presentation/d/11jSMJLye8JAY4E93b82wTNOBN7wxiq-vO6Ie6vp8Vjc" target="_blank" class="link-btn">
+        <a href="https://docs.google.com/presentation/d/18zz433ar1Rd8jYU95V1bselFfLkftz-02YFa6xroEh0/edit?usp=sharing" target="_blank" class="link-btn">
           📽️ Google スライド
         </a>
       </div>
@@ -59,13 +59,17 @@
   const out    = rows[1][0];
   const high   = rows[4][0];
 
-  const comment = `最も飲んだのは${most}。2番目に${second}。${out},${high}は外呑み。`;
+  const comment =
+    `最も飲んだのは${most}。2番目に${second}。${out},${high}は外呑み。`;
 
   const chart = sheet.getCharts()[0];
 
-  // 新規スライドを作成
-  const presentation = SlidesApp.create("自分の酒飲みランキング");
+  // 既存のスライドを開いてリセット
+  const presentation =
+    SlidesApp.openById("18zz433ar1Rd8jYU95V1bselFfLkftz-02YFa6xroEh0");
   const slide = presentation.getSlides()[0];
+
+  slide.getPageElements().forEach(el => el.remove());
 
   // タイトルを挿入
   const titleBox = slide.insertTextBox("自分の酒飲みランキング");
@@ -83,9 +87,6 @@
        .scaleWidth(0.5)
        .alignOnPage(SlidesApp.AlignmentPosition.HORIZONTAL_CENTER)
        .setTop(130);
-
-  // 作成したスライドのURLをログに出力
-  Logger.log(presentation.getUrl());
 }
 
 createSlide();</code></pre>
