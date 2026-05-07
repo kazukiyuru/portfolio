@@ -110,6 +110,46 @@ h1 {
 }
 
 /* ========================================
+   スキルセクション
+   ======================================== */
+.skill-list {
+    list-style: disc;
+    padding-left: 1.4em;
+    max-width: 700px;
+    margin: 0 auto 32px;
+    text-align: left;
+    line-height: 2;
+}
+
+.progate-images {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.progate-img-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.progate-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.progate-img-item img {
+    width: 200px;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+}
+
+/* ========================================
    Works セクション
    ======================================== */
 .works-list {
