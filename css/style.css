@@ -310,6 +310,7 @@ h1 {
     padding: 23px 0 23px 5%;
     color: var(--color-text);
     background-color: var(--color-bg);
+    white-space: nowrap;
 }
 
 /* ========================================
