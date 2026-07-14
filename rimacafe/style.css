@@ -32,6 +32,230 @@ html {
     transition-delay: 0.6s;
 }
 
+/* 強調ポップイン（8-1-4：注意書き・地図など目立たせたい要素用） */
+.pop-in {
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+.pop-in.is-visible {
+    animation: popInAnime 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popInAnime {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== ローディング画面（ロゴがふわっと浮かび上がる） ===== */
+#splash {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    /* ロゴ画像の背景色に合わせて縁を見えなくする */
+    background: #fff9ef;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease;
+}
+
+#splash.fadeout {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.splash-logo {
+    width: min(85vw, 440px);
+    height: auto;
+    opacity: 0;
+    animation: splashLogoIn 1.4s ease-out forwards;
+}
+
+@keyframes splashLogoIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.splash-catch {
+    margin-top: 18px;
+    color: rgb(139, 111, 71);
+    font-size: 1.3rem;
+    letter-spacing: 0.15em;
+    opacity: 0;
+    animation: splashCatchIn 1s ease 1.2s forwards;
+}
+
+@keyframes splashCatchIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== スクロール誘導矢印（9-1-4） ===== */
+.scrolldown4 {
+    position: absolute;
+    left: 50%;
+    bottom: 3%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: arrowmove 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowmove {
+    0% { bottom: 3%; }
+    50% { bottom: 5%; }
+    100% { bottom: 3%; }
+}
+
+.scrolldown4 span {
+    color: #eee;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+
+.scrolldown4::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    transform: rotate(-45deg);
+    margin-top: -6px;
+}
+
+/* ===== ヘッダー縮小（5-1-8） ===== */
+header.height-min {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    z-index: 999;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    animation: headerDown 0.5s forwards;
+    transition: transform 0.3s ease;
+}
+
+/* 下スクロール中はヘッダーを隠して閲覧領域を広げる（UpMove/DownMove） */
+header.height-min.header-hide {
+    transform: translateY(-100%);
+}
+
+/* 縮小時はロゴが枠からはみ出さないようサイズを合わせる */
+header.height-min .header-logo {
+    width: 40px;
+    height: 32px;
+    border-radius: 14px;
+}
+
+@keyframes headerDown {
+    from {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== カードホバーで浮き上がる（7-1-18） ===== */
+.drink-item,
+.tomato,
+.coconut,
+.strovery {
+    /* fade-inのopacityアニメーションを維持しつつホバーを追加 */
+    transition: opacity 0.8s ease-out, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.drink-item:hover,
+.tomato:hover,
+.coconut:hover,
+.strovery:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== ハンバーガーメニュー（5-2-1：3本線が×に） ===== */
+.openbtn {
+    display: none;
+    position: fixed;
+    top: 8px;
+    right: 10px;
+    z-index: 9999;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background: rgb(139, 111, 71);
+    border-radius: 50%;
+}
+
+.openbtn span {
+    display: inline-block;
+    transition: all 0.4s;
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+    background: #fff;
+    width: 45%;
+}
+
+.openbtn span:nth-of-type(1) {
+    top: 15px;
+}
+
+.openbtn span:nth-of-type(2) {
+    top: 23px;
+}
+
+.openbtn span:nth-of-type(3) {
+    top: 31px;
+}
+
+/* activeクラスが付与されると線が回転して×に */
+.openbtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+    opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3) {
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 30%;
+}
+
 header {
     background-color: white;
     height: 10vh;
@@ -101,6 +325,15 @@ section {
 
 .concept {
     height: auto;
+}
+
+/* Concept見出しがスクロール時にずれるのを防ぐ（横方向の移動を無効化） */
+.concept .page2.fade-in {
+    transform: none;
+}
+
+.concept .page2.fade-in.is-visible {
+    transform: none;
 }
 
 .concept .fade-in:nth-child(2) p span {
@@ -288,7 +521,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 30px 0;
+    margin: 50px 0;
     width: 100%;
 }
 
@@ -325,6 +558,8 @@ h2 {
     margin: 0 auto;
     margin-bottom: 0;
     border-radius: 10px 10px 0 0;
+    width: 300px;
+    height: auto;
 }
 
 .drink-item p {
@@ -382,6 +617,10 @@ h2 {
     display: block;
     margin-bottom: 5px;
     color: black;
+}
+
+.monthly-special p2 {
+margin: 50px;
 }
 
 .tomato p .menu-description,
@@ -555,6 +794,12 @@ h2 {
 
 h3.fade-in {
     margin-top: 50px;
+}
+
+/* メニュー各セクションの前後に余白を追加 */
+.menu .grid > h2,
+.menu .grid > h3 {
+    margin: 50px 0;
 }
 
 .headspa {
@@ -889,6 +1134,10 @@ footer p {
         grid-column: 2 / 3;
     }
 
+    .grid_center .drink-item:nth-child(3) {
+        grid-column: 3 / 4;
+    }
+
     .drink-item {
         max-width: none;
         display: flex;
@@ -897,9 +1146,7 @@ footer p {
 
     .grid_center img {
         width: 100%;
-        height: 250px;
-        object-fit: cover;
-        object-position: top;
+        height: auto;
         border-radius: 10px 10px 0 0;
     }
 
@@ -1059,6 +1306,100 @@ footer p {
     border-radius: 30px;
 }
 
+.watanabe-description {
+    max-width: 600px;
+    margin: 0 auto 16px auto;
+    padding: 0 20px;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.watanabe-links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.watanabe-links a {
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.watanabe-links a:hover {
+    transform: scale(1.1);
+}
+
+.watanabe-links i {
+    position: relative;
+    overflow: hidden;
+    font-size: 1.6rem;
+    margin: 0 10px;
+    color: white;
+    background-color: rgb(139, 111, 71);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* クリックしたら波紋が広がる（7-1-11） */
+.watanabe-links i::after,
+.sns-links i::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle, #fff 10%, transparent 10%) no-repeat 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform 0.3s, opacity 1s;
+}
+
+.watanabe-links a:active i::after,
+.sns-links a:active i::after {
+    transform: scale(0, 0);
+    transition: 0s;
+    opacity: 0.4;
+}
+
+/* ===== Our Family SNSリンク ===== */
+.sns-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.sns-links a {
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.sns-links a:hover {
+    transform: scale(1.1);
+}
+
+.sns-links i {
+    position: relative;
+    overflow: hidden;
+    font-size: 1.6rem;
+    margin: 0 10px;
+    color: white;
+    background-color: rgb(139, 111, 71);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .watanabe-items {
     display: flex;
     flex-direction: column;
@@ -1120,4 +1461,191 @@ footer p {
     .notice-box p {
         font-size: 0.88rem;
     }
+}
+/* モバイル：ナビを右からスライドインするパネルに（5-1-14） */
+@media (max-width: 768px) {
+    .openbtn {
+        display: block;
+    }
+
+    header ul {
+        position: fixed;
+        top: 0;
+        right: -120%;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        z-index: 999;
+        background: #FDF5E6;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+        margin: 0;
+        transition: right 0.6s;
+    }
+
+    header ul.panelactive {
+        right: 0;
+    }
+
+    header ul li {
+        padding: 16px 10px;
+    }
+
+    header ul li a {
+        font-size: 1.3rem;
+        letter-spacing: 0.1em;
+    }
+}
+
+/* ===== アンカースクロールの固定ヘッダー分オフセット（8-2-2） ===== */
+section {
+    scroll-margin-top: 60px;
+}
+
+/* ===== トップへ戻るボタン（8-1-2） ===== */
+#page-top {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 998;
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+#page-top a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgb(139, 111, 71);
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+}
+
+#page-top a:hover {
+    background: rgb(110, 87, 55);
+}
+
+#page-top.up-move {
+    animation: pageTopUp 0.5s forwards;
+}
+
+@keyframes pageTopUp {
+    from { opacity: 0; transform: translateY(100px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#page-top.down-move {
+    animation: pageTopDown 0.5s forwards;
+}
+
+@keyframes pageTopDown {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: translateY(100px); }
+}
+
+/* ===== 見出し下に線が伸びる（5-3-3） ===== */
+.line-heading {
+    position: relative;
+}
+
+.line-heading::after {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    width: 60px;
+    height: 2px;
+    background: rgb(139, 111, 71);
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s ease 0.3s;
+}
+
+.line-heading.is-visible::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* ===== ナビの現在地ハイライト（5-1-26） ===== */
+header ul li a.current {
+    color: rgb(139, 111, 71);
+}
+
+/* ===== ローディング中はヒーローの文字を隠し、明けてからフェードイン ===== */
+body.splash-active .home.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ===== ヒーロー背景ゆっくりズームアウト（6-1-3） ===== */
+.page1::after {
+    animation: heroZoom 8s ease-out forwards;
+}
+
+@keyframes heroZoom {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+}
+
+/* ===== Family・農家さん・珈琲屋さん・Healingの写真ホバー（7-1-18） ===== */
+.family1 img,
+.family2 img,
+.family3 img,
+.farmer-content img,
+.god img,
+.head1 img,
+.touch1 img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.family1 img:hover,
+.family2 img:hover,
+.family3 img:hover,
+.farmer-content img:hover,
+.god img:hover,
+.head1 img:hover,
+.touch1 img:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== アニメーションを減らす設定のユーザーへの配慮 ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .fade-in,
+    .pop-in,
+    body.splash-active .home.fade-in {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ===== スクロール進捗バー（Scrollgress） ===== */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: rgb(139, 111, 71);
+    z-index: 10001;
+    transition: width 0.1s ease-out;
 }
