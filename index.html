@@ -8,6 +8,9 @@
     <meta property="og:title" content="高尾一輝　ポートフォリオ">
     <meta property="og:description" content="HTML/CSS・JavaScript・GAS・AI活用によるWeb制作の作品集">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kazukitakao.netlify.app/">
+    <meta property="og:image" content="https://kazukitakao.netlify.app/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="images/kazu_ai.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -134,80 +137,88 @@
         <div class="section-box">
             <h2>制作物</h2>
 
-            <div class="works-list">
+            <div class="works-grid">
 
-                <div class="work-item">
-                    <div class="work-link-box">
-                        <a href="/My_photo_gallery/">My Photo Gallery</a>
-                    </div>
-                    <div class="work-img-box">
-                        <img src="images/profile_new.jpeg" alt="My Photo Gallery">
+                <div class="work-card">
+                    <img class="thumb" loading="lazy" src="images/profile_new.jpeg" alt="My Photo Gallery">
+                    <div class="card-body">
+                        <div class="card-title">My Photo Gallery</div>
+                        <div class="card-sub">HTML/CSS・JS フォトギャラリー</div>
+                        <div class="card-tags"><span class="tag-mini">HTML</span><span class="tag-mini">CSS</span><span class="tag-mini">JavaScript</span></div>
+                        <a class="view-link" href="/My_photo_gallery/">View →</a>
                     </div>
                 </div>
 
-                <div class="work-item">
-                    <div class="work-link-box">
-                        <a href="/rimacafe/">RiMa Cafe</a>
-                    </div>
-                    <div class="work-img-box">
-                        <picture>
-                            <source srcset="images/hero_pc.webp" media="(min-width: 700px)">
-                            <img src="images/hero_mobile.webp" alt="RiMa Cafe">
-                        </picture>
-                    </div>
-                </div>
-
-                <div class="work-item">
-                    <div class="work-link-box">
-                        <a href="https://www.instagram.com/cooking.kazu01">自炊日記</a>
-                    </div>
-                    <div class="work-img-box">
-                        <img src="images/kazu_ai.png" alt="自炊日記">
+                <div class="work-card">
+                    <picture>
+                        <source srcset="images/hero_pc.webp" media="(min-width: 700px)">
+                        <img class="thumb" loading="lazy" src="images/hero_mobile.webp" alt="RiMa Cafe">
+                    </picture>
+                    <div class="card-body">
+                        <div class="card-title">RiMa Cafe</div>
+                        <div class="card-sub">カフェ模擬サイト制作</div>
+                        <div class="card-tags"><span class="tag-mini">HTML</span><span class="tag-mini">CSS</span><span class="tag-mini">JavaScript</span></div>
+                        <a class="view-link" href="/rimacafe/">View →</a>
                     </div>
                 </div>
 
-                <div class="work-item">
-                    <div class="work-link-box">
-                        <a href="/Demo-gallery/">神社巡り</a>
-                    </div>
-                    <div class="work-img-box">
-                        <img src="images/img_2055.jpg" alt="神社巡り">
-                    </div>
-                </div>
-
-                <div class="work-item">
-                    <div class="work-link-box">
-                        <a href="/kadai2/">ゆるトレ・サッカー日記</a>
-                    </div>
-                    <div class="work-img-box">
-                        <img src="images/grant4.jpeg" alt="ゆるトレ・サッカー日記">
+                <div class="work-card">
+                    <img class="thumb" loading="lazy" src="images/kazu_ai.png" alt="自炊日記">
+                    <div class="card-body">
+                        <div class="card-title">自炊日記</div>
+                        <div class="card-sub">Instagram / 料理記録</div>
+                        <div class="card-tags"><span class="tag-mini">Instagram</span></div>
+                        <a class="view-link" href="https://www.instagram.com/cooking.kazu01" target="_blank" rel="noopener">View →</a>
                     </div>
                 </div>
 
-                <div class="work-item">
-                    <div class="work-link-box">
-                        <a href="/heling/">ヒーリングサロン（模擬）</a>
-                    </div>
-                    <div class="work-img-box">
-                        <img src="images/heling_therapist.jpeg" alt="ヒーリングサロン（模擬）" style="object-position: center 88%;">
-                    </div>
-                </div>
-
-                <div class="work-item">
-                    <div class="work-link-box">
-                        <a href="/drink/">自分の酒飲み</a>
-                    </div>
-                    <div class="work-img-box">
-                        <img src="images/beel.png" alt="自分の酒飲み">
+                <div class="work-card">
+                    <img class="thumb" loading="lazy" src="images/img_2055.jpg" alt="神社巡り">
+                    <div class="card-body">
+                        <div class="card-title">神社巡り</div>
+                        <div class="card-sub">フォトギャラリーサイト</div>
+                        <div class="card-tags"><span class="tag-mini">HTML</span><span class="tag-mini">CSS</span><span class="tag-mini">JavaScript</span></div>
+                        <a class="view-link" href="/Demo-gallery/">View →</a>
                     </div>
                 </div>
 
-                <div class="work-item">
-                    <div class="work-link-box">
-                        <a href="/vibe/">バイブコーディング</a>
+                <div class="work-card">
+                    <img class="thumb" loading="lazy" src="images/grant4.jpeg" alt="ゆるトレ・サッカー日記">
+                    <div class="card-body">
+                        <div class="card-title">ゆるトレ・サッカー日記</div>
+                        <div class="card-sub">ブログサイト制作</div>
+                        <div class="card-tags"><span class="tag-mini">HTML</span><span class="tag-mini">CSS</span><span class="tag-mini">JavaScript</span></div>
+                        <a class="view-link" href="/kadai2/">View →</a>
                     </div>
-                    <div class="work-img-box">
-                        <img src="images/vibe_coding.svg" alt="バイブコーディング">
+                </div>
+
+                <div class="work-card">
+                    <img class="thumb" loading="lazy" src="images/heling_therapist.jpeg" alt="ヒーリングサロン（模擬）" style="object-position: center 88%;">
+                    <div class="card-body">
+                        <div class="card-title">ヒーリングサロン（模擬）</div>
+                        <div class="card-sub">サロンサイト制作</div>
+                        <div class="card-tags"><span class="tag-mini">HTML</span><span class="tag-mini">CSS</span><span class="tag-mini">JavaScript</span></div>
+                        <a class="view-link" href="/heling/">View →</a>
+                    </div>
+                </div>
+
+                <div class="work-card">
+                    <img class="thumb" loading="lazy" src="images/beel.png" alt="自分の酒飲み">
+                    <div class="card-body">
+                        <div class="card-title">自分の酒飲み</div>
+                        <div class="card-sub">個人ブログ制作</div>
+                        <div class="card-tags"><span class="tag-mini">HTML</span><span class="tag-mini">CSS</span><span class="tag-mini">JavaScript</span></div>
+                        <a class="view-link" href="/drink/">View →</a>
+                    </div>
+                </div>
+
+                <div class="work-card">
+                    <img class="thumb" loading="lazy" src="images/vibe_coding.svg" alt="バイブコーディング" style="object-fit: contain; padding: 20px; background: var(--color-bg);">
+                    <div class="card-body">
+                        <div class="card-title">バイブコーディング</div>
+                        <div class="card-sub">AI × 高速プロトタイピング</div>
+                        <div class="card-tags"><span class="tag-mini">AI</span><span class="tag-mini">バイブコーディング</span></div>
+                        <a class="view-link" href="/vibe/">View →</a>
                     </div>
                 </div>
 

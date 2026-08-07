@@ -36,7 +36,7 @@ document.querySelectorAll('.menu-link').forEach((link) => {
  * スクロール出現アニメーション
  * （JSでfade-upを付与するので、JS無効環境でもコンテンツは表示される）
  **/
-const fadeTargets = document.querySelectorAll('.section-box, .work-item');
+const fadeTargets = document.querySelectorAll('.section-box, .work-card');
 fadeTargets.forEach((el) => el.classList.add('fade-up'));
 
 const appearObserver = new IntersectionObserver((entries) => {
